@@ -1,5 +1,6 @@
 import "@/styles/globals.css"
-import type { AppType } from "next/app"
+import type { AppProps, AppType } from "next/app"
+import { NextPageWithLayout } from "@/types"
 import { Inter as FontSans } from "@next/font/google"
 import { type Session } from "next-auth"
 import { SessionProvider } from "next-auth/react"
@@ -10,10 +11,15 @@ const fontSans = FontSans({
   display: "swap",
 })
 
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
 const App: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
-}) => {
+}: AppPropsWithLayout) => {
+  const getLayout = Component.getLayout ?? ((page) => page)
   return (
     <>
       <style jsx global>{`
@@ -22,7 +28,7 @@ const App: AppType<{ session: Session | null }> = ({
 				}
 			}`}</style>
       <SessionProvider session={session}>
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
       </SessionProvider>
     </>
   )

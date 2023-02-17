@@ -1,10 +1,12 @@
-import type { NavItem } from "@/types"
+import type { NavItem, dashboardNavItem } from "@/types"
+import { ArrowLeftRight, Eye, Home, Mails, Wallet } from "lucide-react"
 
 interface SiteConfig {
   name: string
   description: string
   mainNav: NavItem[]
   homeNav: NavItem[]
+  sidebarNav: dashboardNavItem[]
   links: {
     twitter: string
     github: string
@@ -66,6 +68,38 @@ export const siteConfig: SiteConfig = {
       href: "/docs",
       disabled: true,
       external: false,
+    },
+  ],
+  sidebarNav: [
+    {
+      title: "Home",
+      href: "/dashboard",
+      disabled: false,
+      icon: Home,
+    },
+    {
+      title: "Address",
+      href: "#",
+      disabled: false,
+      icon: Wallet,
+    },
+    {
+      title: "Transaction",
+      href: "#",
+      disabled: false,
+      icon: ArrowLeftRight,
+    },
+    {
+      title: "Email",
+      href: "#",
+      disabled: false,
+      icon: Mails,
+    },
+    {
+      title: "Heatmaps",
+      href: "#",
+      disabled: false,
+      icon: Eye,
     },
   ],
   links: {
