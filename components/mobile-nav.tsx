@@ -17,7 +17,7 @@ interface IMobileNavProps {
 const MobileNav = ({ navItems, children }: IMobileNavProps) => {
   const { data: session } = useSession()
   return (
-    <div className="bg-brand-600 border-brand-400 animate-in slide-in-from-bottom-10 fade-in-25 absolute inset-0 top-[9vh] z-50 mx-4 h-fit rounded-lg border p-3 duration-500 md:hidden">
+    <div className="bg-brand-600 border-brand-400 animate-in slide-in-from-bottom-10 fade-in-25 absolute inset-0 z-50 mx-4 mt-20 h-fit rounded-lg border p-3 duration-500 md:hidden">
       {navItems?.length ? (
         <MainNav
           navItems={navItems}
