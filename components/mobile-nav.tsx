@@ -47,7 +47,6 @@ const MobileNav = ({ navItems, children }: IMobileNavProps) => {
         </div>
       ) : (
         <div className="flex w-full flex-col">
-          <User userClasses="mb-6 space-x-4 cursor-pointer" />
           <button
             onClick={() =>
               signOut({
