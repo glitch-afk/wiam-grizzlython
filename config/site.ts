@@ -1,10 +1,13 @@
-import type { NavItem } from "@/types"
+import type { DashboardNavItem, NavItem } from "@/types"
+
+import { Icons } from "@/components/icons"
 
 interface SiteConfig {
   name: string
   description: string
   mainNav: NavItem[]
   homeNav: NavItem[]
+  dashboardSideNav: DashboardNavItem[]
   links: {
     twitter: string
     github: string
@@ -46,6 +49,43 @@ export const siteConfig: SiteConfig = {
       href: "/docs",
       disabled: true,
       external: false,
+    },
+  ],
+  dashboardSideNav: [
+    {
+      title: "Home",
+      href: "/dashboard",
+      disabled: false,
+      external: false,
+      icon: Icons.home,
+    },
+    {
+      title: "Address",
+      href: "#",
+      disabled: false,
+      external: false,
+      icon: Icons.wallet,
+    },
+    {
+      title: "Transaction",
+      href: "#",
+      disabled: false,
+      external: false,
+      icon: Icons.transation,
+    },
+    {
+      title: "Email",
+      href: "#",
+      disabled: false,
+      external: false,
+      icon: Icons.email,
+    },
+    {
+      title: "Heatmaps",
+      href: "#",
+      disabled: false,
+      external: false,
+      icon: Icons.eye,
     },
   ],
   homeNav: [

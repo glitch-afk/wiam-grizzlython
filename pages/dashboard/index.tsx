@@ -1,15 +1,12 @@
 import React from "react"
+import Layout from "@/layouts/_dashboard"
 import { signOut, useSession } from "next-auth/react"
 
 const Dashboard = () => {
-  const { data: session } = useSession()
   return (
-    <>
-      <div style={{ maxWidth: "60px" }}>
-        <pre>{JSON.stringify(session, null, 2)}</pre>
-      </div>
+    <Layout>
       <button onClick={() => signOut()}>Sign out</button>
-    </>
+    </Layout>
   )
 }
 

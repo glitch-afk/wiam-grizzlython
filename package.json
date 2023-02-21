@@ -13,6 +13,7 @@
     "format:check": "prettier --check \"**/*.{ts,tsx}\" --cache"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.11",
     "@hookform/resolvers": "^2.9.11",
     "@next-auth/prisma-adapter": "^1.0.5",
     "@next/font": "13.1.6",
