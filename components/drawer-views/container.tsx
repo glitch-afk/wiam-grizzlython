@@ -33,7 +33,7 @@ export default function DrawersContainer() {
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed inset-0 z-40 overflow-hidden"
+        className="fixed inset-0 z-40 overflow-hidden xl:hidden"
         onClose={closeDrawer}
       >
         <Transition.Child

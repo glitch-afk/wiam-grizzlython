@@ -1,12 +1,17 @@
 import {
+  ArrowLeftRight,
   Bell,
   ChevronRight,
   CornerUpRight,
+  Eye,
+  Home,
   Loader2,
   LogIn,
   LogOut,
+  Mail,
   Plus,
   Twitter,
+  Wallet,
   X,
   type Icon as LucideIcon,
   type LucideProps,
@@ -24,6 +29,11 @@ export const Icons = {
   plus: Plus,
   rightArrow: ChevronRight,
   close: X,
+  home: Home,
+  wallet: Wallet,
+  transaction: ArrowLeftRight,
+  email: Mail,
+  eye: Eye,
   logo: (props: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

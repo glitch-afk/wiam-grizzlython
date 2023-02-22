@@ -1,7 +1,6 @@
 import React from "react"
 
 import { cn } from "@/lib/utils"
-import Logo from "@/components/site-logo"
 import Header from "./_header"
 import Sidebar from "./_sidebar"
 
@@ -24,5 +23,4 @@ const DashboardLayout = ({
     </div>
   )
 }
-
 export default DashboardLayout
