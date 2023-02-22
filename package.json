@@ -19,6 +19,7 @@
     "@next/font": "13.1.6",
     "@prisma/client": "^4.10.1",
     "@radix-ui/react-avatar": "^1.0.1",
+    "@radix-ui/react-dropdown-menu": "^2.0.2",
     "clsx": "^1.2.1",
     "jotai": "^2.0.2",
     "lucide-react": "^0.115.0",
