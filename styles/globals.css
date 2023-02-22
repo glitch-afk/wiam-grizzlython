@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Hide spin button for input type number */
+input.spin-button-hidden::-webkit-outer-spin-button,
+input.spin-button-hidden::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-brand-200;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-brand-600;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-brand-500;
+}
