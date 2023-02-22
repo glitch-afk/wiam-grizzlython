@@ -1,7 +1,9 @@
 import React from "react"
 
+import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { useDrawer } from "../drawer-views/context"
+import MainNav from "../main-nav"
 import Logo from "../site-logo"
 import Hamburger from "../ui/hamburger"
 import User from "../user"
@@ -9,7 +11,11 @@ import User from "../user"
 function HeaderRightArea() {
   return (
     <div className="relative order-last flex shrink-0 items-center gap-4 sm:gap-6 lg:gap-8">
-      <User userClasses="p-1 bg-brand-700 rounded-full flex space-x-2" />
+      <MainNav
+        navItems={siteConfig.homeNav}
+        classes="space-x-4 xl:space-x-6 hidden md:flex"
+      />
+      <User userClasses="p-2 xl:p-1 bg-brand-700 rounded-full flex space-x-2" />
     </div>
   )
 }
@@ -29,7 +35,9 @@ const Header = ({ className }: { className?: string }) => {
             className="flex xl:hidden"
             onClick={() => openDrawer("DASHBOARD_SIDEBAR")}
           />
-          <Logo />
+          <div className="xl:hidden">
+            <Logo />
+          </div>
         </div>
         <HeaderRightArea />
       </div>
