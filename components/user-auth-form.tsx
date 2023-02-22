@@ -79,7 +79,7 @@ const UserAuthForm = ({
         color="primary"
         onClick={() =>
           signIn("google", {
-            callbackUrl: siteRoutes.home,
+            callbackUrl: searchParams.get("from") || siteRoutes.home,
           })
         }
       >
