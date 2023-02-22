@@ -40,10 +40,10 @@ const Sidebar = ({ className }: { className?: string }) => {
             key={idx}
             href={item.disabled ? "#" : (item.href as string)}
             className={cn(
-              "text-brand-100 flex items-center rounded-md px-3 py-4 transition-all duration-300 hover:text-white",
+              "text-brand-100 flex items-center rounded-md p-4 transition-all duration-300 hover:text-white",
               item.href === pathname
-                ? "bg-brand-400 font-semibold text-white"
-                : "hover:bg-brand-400"
+                ? "bg-brand-500 font-semibold text-white"
+                : "hover:bg-brand-500"
             )}
           >
             <item.icon className="mr-3 h-6 w-6" />

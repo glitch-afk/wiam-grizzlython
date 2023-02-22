@@ -35,3 +35,26 @@ export const projects = [
     status: "DEFAULT",
   },
 ]
+
+export const OverViewCardsData = [
+  {
+    title: "Page Views",
+    dataDisplay: "2.7k",
+    percentChange: 4,
+  },
+  {
+    title: "Total Unique Users",
+    dataDisplay: "98",
+    percentChange: 12,
+  },
+  {
+    title: "Average Retention Time",
+    dataDisplay: "17 Sec",
+    percentChange: 2,
+  },
+  {
+    title: "Bounce Rate",
+    dataDisplay: "35%",
+    percentChange: -3,
+  },
+]
