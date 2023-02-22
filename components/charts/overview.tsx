@@ -55,7 +55,7 @@ const OverviewChart = ({
   percentChange,
 }: OverviewChartProps) => {
   return (
-    <div className="shadow-card min-h-fit rounded-lg bg-transparent text-white">
+    <div className="min-h-fit rounded-lg bg-transparent text-white">
       {/* data */}
       <div className="flex items-baseline space-x-3 text-lg">
         <h3 className="text-xl font-medium tracking-tighter text-white sm:text-3xl">

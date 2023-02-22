@@ -47,7 +47,10 @@ const Dashboard = () => {
         <div className="3xl:grid-cols-4 grid w-full grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
           {OverViewCardsData.map(
             ({ title, dataDisplay, percentChange }, idx) => (
-              <div className="bg-brand-500 rounded-md p-4" key={idx}>
+              <div
+                className="bg-brand-500 shadow-card rounded-md p-4"
+                key={idx}
+              >
                 <span className="text-brand-50 text-sm font-semibold">
                   {title}
                 </span>

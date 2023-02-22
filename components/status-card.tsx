@@ -22,7 +22,7 @@ const StatusCard = ({
   return (
     <Link
       href="#"
-      className="bg-brand-500 border-brand-400 col-span-1 rounded-md border p-4"
+      className="bg-brand-500 border-brand-400 shadow-card col-span-1 rounded-md border p-4"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">

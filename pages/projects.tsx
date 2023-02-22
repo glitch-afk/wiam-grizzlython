@@ -46,11 +46,12 @@ const ProjectsPage = () => {
           {/* project cards */}
           {projects?.length ? (
             <div className="mt-12 grid w-full grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-              {projects?.map(({ status, title, description }, idx) => (
+              {projects?.map(({ status, title, description, date }, idx) => (
                 <StatusCard
                   key={idx}
                   status={status}
                   cardTitle={title}
+                  listingDate={date}
                   cardDescription={description}
                 />
               ))}

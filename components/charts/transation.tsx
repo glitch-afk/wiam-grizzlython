@@ -58,7 +58,14 @@ const TransactionChart = ({ chartData }: { chartData: any }) => {
           stroke="#9747FF"
           fill="url(#colorUv)"
         />
-        <Tooltip />
+        <Tooltip
+          contentStyle={{
+            background: "#15181E",
+            border: "none",
+            borderRadius: "8px",
+            outline: "none",
+          }}
+        />
       </AreaChart>
     </ResponsiveContainer>
   )

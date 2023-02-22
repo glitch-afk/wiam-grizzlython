@@ -50,7 +50,9 @@ const User = ({
             {/* </div> */}
           </DropdownMenuTrigger>
           <DropdownMenuContent side="bottom" align="end">
-            <DropdownMenuLabel>Signed In as</DropdownMenuLabel>
+            <DropdownMenuLabel className="text-xs">
+              Signed In as
+            </DropdownMenuLabel>
             <DropdownMenuItem>{session?.user.name}</DropdownMenuItem>
             <DropdownMenuSeparator />
             {navItems?.length ? (
