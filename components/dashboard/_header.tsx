@@ -15,7 +15,10 @@ function HeaderRightArea() {
         navItems={siteConfig.homeNav}
         classes="space-x-4 xl:space-x-6 hidden md:flex"
       />
-      <User userClasses="p-2 xl:p-1 bg-brand-700 rounded-full flex space-x-2" />
+      <User
+        userClasses="p-2 xl:p-1 bg-brand-700 rounded-full flex space-x-2"
+        navItems={siteConfig.homeNav}
+      />
     </div>
   )
 }
