@@ -22,17 +22,17 @@ const StatusCard = ({
   return (
     <Link
       href="#"
-      className="bg-brand-500 border-brand-400 shadow-card col-span-1 rounded-md border p-4"
+      className="bg-brand-500 border-brand-400 shadow-card col-span-1 rounded-md border p-6"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <Avatar className="h-6 w-6 md:h-8 md:w-8">
+          <Avatar className="h-10 w-10 md:h-12 md:w-12">
             <AvatarImage src="" /> {/* Fetch url favicon  */}
             <AvatarFallback>W</AvatarFallback>
           </Avatar>
           <div>
-            <h3 className="text-sm font-bold sm:text-base">{cardTitle}</h3>
-            <p className="text-brand-100 text-[11px]">
+            <h3 className="text-base font-bold sm:text-lg">{cardTitle}</h3>
+            <p className="text-brand-100 text-sm">
               {listingDate && `listed on ${listingDate}`}
             </p>
           </div>
@@ -51,7 +51,7 @@ const StatusCard = ({
           &nbsp; •
         </div>
       </div>
-      <p className="text-brand-100 mt-3 w-full overflow-hidden text-ellipsis break-all text-xs">
+      <p className="text-brand-100 mt-3 w-full overflow-hidden text-ellipsis break-all text-sm md:text-base">
         {cardDescription}
       </p>
     </Link>
