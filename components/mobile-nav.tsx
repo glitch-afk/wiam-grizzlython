@@ -1,8 +1,7 @@
-import React, { Dispatch, SetStateAction, useRef } from "react"
+import React from "react"
 import Link from "next/link"
 import type { NavItem } from "@/types"
 import { signOut, useSession } from "next-auth/react"
-import { useOnClickOutside } from "usehooks-ts"
 
 import { siteRoutes } from "@/config/site"
 import { Icons } from "@/components/icons"
@@ -13,17 +12,11 @@ import User from "@/components/user"
 interface IMobileNavProps {
   navItems?: NavItem[]
   children?: React.ReactNode
-  setIsOpen: Dispatch<SetStateAction<boolean>>
+  ref: React.Ref<HTMLDivElement>
 }
 
-const MobileNav = ({ navItems, children, setIsOpen }: IMobileNavProps) => {
+const MobileNav = ({ navItems, children, ref }: IMobileNavProps) => {
   const { data: session } = useSession()
-  const ref = useRef(null)
-
-  const handleClickOutside = () => {
-    setIsOpen(false)
-  }
-  useOnClickOutside(ref, handleClickOutside)
 
   return (
     <div
