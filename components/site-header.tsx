@@ -26,7 +26,7 @@ const SiteHeader = ({ children, navItems }: ISiteHeaderProps) => {
       </div>
       {isOpen ? (
         <div className="md:hidden">
-          <MobileNav navItems={navItems} />
+          <MobileNav navItems={navItems} setIsOpen={setIsOpen} />
         </div>
       ) : null}
     </div>
