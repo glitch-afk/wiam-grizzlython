@@ -9,6 +9,8 @@ import {
 import OverviewChart from "@/components/charts/overview"
 import TransactionChart from "@/components/charts/transation"
 import DashboardLayout from "@/components/dashboard/_layout"
+import PagePerformanceTable from "@/components/dashboard/tables/page-performance-table"
+import RecentActivityTable from "@/components/dashboard/tables/recent-activity"
 import {
   Select,
   SelectContent,
@@ -79,6 +81,28 @@ const Dashboard = () => {
           </div>
           <div className="3xl:h-[496px] 4xl:h-[580px] -mx-6 mt-5 h-56 sm:mt-8 md:h-96 lg:h-[416px] xl:h-[479px]">
             <TransactionChart chartData={transactionChartData} />
+          </div>
+        </div>
+      </div>
+      {/* tables */}
+      <div className="mt-6 grid w-full grid-cols-1 gap-4 xl:grid-cols-8 xl:gap-6">
+        <div className="bg-brand-600 border-brand-400 col-span-1 rounded-lg border p-3 md:p-6 xl:col-span-5">
+          <div>
+            <h3 className="text-brand-100 text-xl font-semibold">
+              Recent Activities
+            </h3>
+
+            <div className="mt-8 overflow-hidden rounded-lg shadow">
+              <RecentActivityTable />
+            </div>
+          </div>
+        </div>
+        <div className="bg-brand-600 border-brand-400 col-span-1 rounded-lg border p-3 md:p-6 xl:col-span-3">
+          <h3 className="text-brand-100 text-xl font-semibold">
+            Page Performance
+          </h3>
+          <div className="mt-8 overflow-hidden rounded-lg shadow">
+            <PagePerformanceTable />
           </div>
         </div>
       </div>
