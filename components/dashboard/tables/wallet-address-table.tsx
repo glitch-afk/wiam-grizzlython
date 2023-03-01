@@ -23,7 +23,7 @@ const columns = [
     header: () => (
       <span className="w-fit whitespace-nowrap">Wallet Address</span>
     ),
-    cell: (info) => <span className="w-full truncate">{info.getValue()}</span>,
+    cell: (info) => <span className="truncate">{info.getValue()}</span>,
   }),
   columnHelper.accessor("chain", {
     header: () => <span className="w-fit whitespace-nowrap">Chain</span>,
@@ -80,7 +80,7 @@ const WalletAddressTable = () => {
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="bg-brand-500 group min-w-full px-2 py-5 text-left font-normal uppercase first:rounded-l-lg first:pl-6 last:rounded-r-lg last:pr-6  md:px-4"
+                    className="bg-brand-500 group w-fit px-2 py-5 text-left font-normal uppercase first:rounded-l-lg first:pl-6 last:rounded-r-lg last:pr-6 md:px-4"
                   >
                     {header.isPlaceholder
                       ? null
@@ -89,7 +89,7 @@ const WalletAddressTable = () => {
                           header.getContext()
                         )}
                     {header.column.getCanFilter() ? (
-                      <div>
+                      <div className="mt-2">
                         <Filter column={header.column} table={table} />
                       </div>
                     ) : null}
