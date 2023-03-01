@@ -1,9 +1,11 @@
 import "@/styles/globals.css"
+import "@/styles/scrollbar.css"
 import type { AppType } from "next/app"
 import { Inter as FontSans } from "@next/font/google"
 import { type Session } from "next-auth"
 import { SessionProvider } from "next-auth/react"
 
+import "overlayscrollbars/overlayscrollbars.css"
 import DrawersContainer from "@/components/drawer-views/container"
 
 const fontSans = FontSans({

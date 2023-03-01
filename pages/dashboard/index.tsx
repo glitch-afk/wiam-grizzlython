@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import Head from "next/head"
 import { OverViewCardsData } from "@/data"
 import {
   monthlyComparison,
@@ -43,70 +44,77 @@ const Dashboard = () => {
   }
 
   return (
-    <DashboardLayout>
-      <div className="bg-brand-600 border-brand-400 w-full rounded-lg border p-4 md:p-8">
-        {/* overview cards */}
-        <div className="3xl:grid-cols-4 grid w-full grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
-          {OverViewCardsData.map(
-            ({ title, dataDisplay, percentChange }, idx) => (
-              <div
-                className="bg-brand-500 shadow-card rounded-md p-4"
-                key={idx}
-              >
-                <span className="text-brand-50 text-sm font-semibold">
-                  {title}
-                </span>
-                <OverviewChart
-                  strokeColor={strokeColors[idx]}
-                  percentChange={percentChange}
-                  dataDisplay={dataDisplay}
-                />
-              </div>
-            )
-          )}
-        </div>
-        {/* volume chart */}
-        <div>
-          <div className="mt-16">
-            <Select onValueChange={handleOnChange}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Yearly Data" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Week">Weekly Data</SelectItem>
-                <SelectItem value="Month">Monthly Data</SelectItem>
-                <SelectItem value="Year">Yearly Data</SelectItem>
-              </SelectContent>
-            </Select>
+    <>
+      <Head>
+        <title>Dashboard</title>
+        <meta name="description" content="Analytics for Web3" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <DashboardLayout>
+        <div className="bg-brand-600 border-brand-400 w-full rounded-lg border p-4">
+          {/* overview cards */}
+          <div className="3xl:grid-cols-4 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
+            {OverViewCardsData.map(
+              ({ title, dataDisplay, percentChange }, idx) => (
+                <div
+                  className="border-brand-400 shadow-card hover:bg-brand-500 rounded-md border p-4"
+                  key={idx}
+                >
+                  <span className="text-brand-50 text-sm font-semibold">
+                    {title}
+                  </span>
+                  <OverviewChart
+                    strokeColor={strokeColors[idx]}
+                    percentChange={percentChange}
+                    dataDisplay={dataDisplay}
+                  />
+                </div>
+              )
+            )}
           </div>
-          <div className="3xl:h-[496px] 4xl:h-[580px] -mx-6 mt-5 h-56 sm:mt-8 md:h-96 lg:h-[416px] xl:h-[479px]">
-            <TransactionChart chartData={transactionChartData} />
-          </div>
-        </div>
-      </div>
-      {/* tables */}
-      <div className="mt-6 grid w-full grid-cols-1 gap-4 xl:grid-cols-8 xl:gap-6">
-        <div className="bg-brand-600 border-brand-400 col-span-1 rounded-lg border p-3 md:p-6 xl:col-span-5">
+          {/* volume chart */}
           <div>
-            <h3 className="text-brand-100 text-xl font-semibold">
-              Recent Activities
-            </h3>
-
-            <div className="mt-8 overflow-hidden rounded-lg shadow">
-              <RecentActivityTable />
+            <div className="mt-16">
+              <Select onValueChange={handleOnChange}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Yearly Data" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Week">Weekly Data</SelectItem>
+                  <SelectItem value="Month">Monthly Data</SelectItem>
+                  <SelectItem value="Year">Yearly Data</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="-mx-6 mt-5 h-56 sm:mt-8 md:h-96">
+              <TransactionChart chartData={transactionChartData} />
             </div>
           </div>
         </div>
-        <div className="bg-brand-600 border-brand-400 col-span-1 rounded-lg border p-3 md:p-6 xl:col-span-3">
-          <h3 className="text-brand-100 text-xl font-semibold">
-            Page Performance
-          </h3>
-          <div className="mt-8 overflow-hidden rounded-lg shadow">
-            <PagePerformanceTable />
+        {/* tables */}
+        <div className="mt-6 grid w-full grid-cols-1 gap-4 xl:grid-cols-8 xl:gap-6">
+          <div className="bg-brand-600 border-brand-400 col-span-1 rounded-lg border p-3 md:p-6 xl:col-span-5">
+            <div>
+              <h3 className="text-brand-100 text-xl font-semibold">
+                Recent Activities
+              </h3>
+
+              <div className="mt-8 overflow-hidden rounded-lg shadow">
+                <RecentActivityTable />
+              </div>
+            </div>
+          </div>
+          <div className="bg-brand-600 border-brand-400 col-span-1 rounded-lg border p-3 md:p-6 xl:col-span-3">
+            <h3 className="text-brand-100 text-xl font-semibold">
+              Page Performance
+            </h3>
+            <div className="mt-8 overflow-hidden rounded-lg shadow">
+              <PagePerformanceTable />
+            </div>
           </div>
         </div>
-      </div>
-    </DashboardLayout>
+      </DashboardLayout>
+    </>
   )
 }
 

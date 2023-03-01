@@ -30,7 +30,7 @@ const TransactionChart = ({ chartData }: { chartData: any }) => {
       >
         <defs>
           <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#9747FF" stopOpacity={0.4} />
+            <stop offset="5%" stopColor="#9747FF" stopOpacity={0.2} />
             <stop offset="95%" stopColor="#9747FF" stopOpacity={0} />
           </linearGradient>
         </defs>

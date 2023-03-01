@@ -61,8 +61,8 @@ export const siteConfig: SiteConfig = {
     },
     {
       title: "Address",
-      href: "#",
-      disabled: true,
+      href: "/dashboard/address",
+      disabled: false,
       external: false,
       icon: Icons.wallet,
     },

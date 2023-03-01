@@ -25,6 +25,8 @@ specifiers:
   lucide-react: ^0.115.0
   next: 13.1.6
   next-auth: ^4.19.2
+  overlayscrollbars: ^2.1.0
+  overlayscrollbars-react: ^0.5.0
   postcss: ^8.4.21
   prettier: ^2.8.4
   prisma: ^4.10.1
@@ -55,6 +57,8 @@ dependencies:
   lucide-react: 0.115.0_react@18.2.0
   next: 13.1.6_pjwopsidmaokadturxaafygjp4
   next-auth: 4.19.2_3vryta7zmbcsw4rrqf4axjqggm
+  overlayscrollbars: 2.1.0
+  overlayscrollbars-react: 0.5.0_iekta5oqkv3o26rsm7fwgvclru
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.43.1_react@18.2.0
@@ -2946,6 +2950,20 @@ packages:
       type-check: 0.4.0
       word-wrap: 1.2.3
     dev: true
+
+  /overlayscrollbars-react/0.5.0_iekta5oqkv3o26rsm7fwgvclru:
+    resolution: {integrity: sha512-uCNTnkfWW74veoiEv3kSwoLelKt4e8gTNv65D771X3il0x5g5Yo0fUbro7SpQzR9yNgi23cvB2mQHTTdQH96pA==}
+    peerDependencies:
+      overlayscrollbars: ^2.0.0
+      react: '>=16.8.0'
+    dependencies:
+      overlayscrollbars: 2.1.0
+      react: 18.2.0
+    dev: false
+
+  /overlayscrollbars/2.1.0:
+    resolution: {integrity: sha512-L6p4o4aWse5pDstRnJjZaos+al+bkuAgzGIlWwlsxRSgW6+7Kvrp+kAzlWoTZ1bgB4CJj+8u5bjdq8XHEhWjrw==}
+    dev: false
 
   /p-limit/3.1.0:
     resolution: {integrity: sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ==}
