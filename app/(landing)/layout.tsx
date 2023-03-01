@@ -17,7 +17,7 @@ const LandingLayout = ({ children }: LandingLayoutProps) => {
             mainNavItem={siteConfig.mainNav}
             mainNavClasses="lg:flex items-center space-x-4 lg:space-x-6 justify-between border border-dark-400 rounded-full py-2 px-4 max-w-[350px] w-full hidden"
           />
-          <div className="hidden items-center space-x-2 md:flex lg:space-x-4">
+          <div className="hidden items-center space-x-4 lg:flex">
             <Button shape="pill" variant="ghost" className="text-semibold">
               Log in
             </Button>

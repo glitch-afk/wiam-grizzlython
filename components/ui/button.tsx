@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { VariantProps, cva } from "class-variance-authority"
+import { type VariantProps, cva } from "class-variance-authority"
 
 import { Icons } from "@/components/icons"
 
@@ -66,9 +66,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref: React.Ref<HTMLButtonElement | null>
   ) => {
-    let [dripShow, setDripShow] = React.useState<boolean>(false)
-    let [dripX, setDripX] = React.useState<number>(0)
-    let [dripY, setDripY] = React.useState<number>(0)
+    const [dripShow, setDripShow] = React.useState<boolean>(false)
+    const [dripX, setDripX] = React.useState<number>(0)
+    const [dripY, setDripY] = React.useState<number>(0)
 
     const buttonRef = React.useRef<HTMLButtonElement>(null)
     React.useImperativeHandle(ref, () => buttonRef.current)

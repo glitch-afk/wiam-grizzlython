@@ -19,8 +19,8 @@ export default function ButtonDrip({
   onCompleted,
 }: ButtonDripTypes) {
   const dripRef = useRef<HTMLDivElement>(null)
-  let top = Number.isNaN(+y) ? 0 : y - 10
-  let left = Number.isNaN(+x) ? 0 : x - 10
+  const top = Number.isNaN(+y) ? 0 : y - 10
+  const left = Number.isNaN(+x) ? 0 : x - 10
   useEffect(() => {
     if (!dripRef.current) return
     dripRef.current.addEventListener("animationend", onCompleted)

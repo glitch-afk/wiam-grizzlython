@@ -1,5 +1,6 @@
 import "@/styles/globals.css"
 import { siteConfig } from "@/config/site"
+import DrawersContainer from "@/components/drawer-views/container"
 
 export const metadata = {
   title: siteConfig.name,
@@ -13,7 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-dark-700 text-white antialiased">{children}</body>
+      <body className="bg-dark-700 text-white antialiased">
+        {children}
+        <DrawersContainer />
+      </body>
     </html>
   )
 }
