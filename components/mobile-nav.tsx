@@ -20,7 +20,7 @@ const MobileNav = ({ mobileNavItems, children }: MobileMavProps) => {
   return (
     <div
       className={cn(
-        "top-0 left-0 z-40 h-full w-full max-w-full border-r border-dark-400 bg-dark-600 xs:w-80"
+        "border-dark-400 bg-dark-600 xs:w-80 top-0 left-0 z-40 h-full w-full max-w-full border-r"
       )}
     >
       <div className="relative flex h-24 items-center justify-between overflow-hidden px-6 py-4 2xl:px-8">
@@ -51,7 +51,7 @@ const MobileNav = ({ mobileNavItems, children }: MobileMavProps) => {
       {children}
       {/* seperator */}
       {mobileNavItems?.length ? (
-        <div className="m-6 h-[2px] bg-dark-300" />
+        <div className="bg-dark-300 m-6 h-[2px]" />
       ) : null}
       {/* extra children for mobile nav */}
       <div className="mt-8 w-full px-6">

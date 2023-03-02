@@ -17,6 +17,31 @@ body {
     sans-serif;
 }
 
+/* Hide spin button for input type number */
+input.spin-button-hidden::-webkit-outer-spin-button,
+input.spin-button-hidden::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-dark-200;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-dark-600;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-dark-500;
+}
+
+/* underline styles for nav */
 .customUnderline {
   padding-bottom: 1px;
   color: white;
@@ -39,4 +64,38 @@ body {
 .customUnderline:hover:after {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* homepage button */
+.customBtn {
+  @apply rounded-full relative bg-white text-black border-none outline-none px-8 py-3 font-bold;
+}
+.customBtn::after {
+  @apply rounded-full absolute -z-10 -left-[2px] -top-[2px];
+  content: "";
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  background: linear-gradient(261.48deg, #8e64ff 11.86%, #f92672 87.19%),
+    linear-gradient(276.58deg, #f92672 14.03%, #8e64ff 91.02%);
+  filter: blur(5px);
+  transition: all 0.5s ease-in-out;
+}
+.customBtn:hover::after {
+  filter: blur(15px);
+}
+
+.heroGradient-purple {
+  background: #8e64ff;
+  opacity: 0.3;
+  filter: blur(100px);
+  border-radius: 180.5px;
+  transform: matrix(0.93, 0.36, -0.57, 0.82, 0, 0);
+}
+
+.heroGradient-pink {
+  background: #f92672;
+  opacity: 0.3;
+  filter: blur(150px);
+  border-radius: 180.5px;
+  transform: matrix(0.93, 0.36, -0.57, 0.82, 0, 0);
 }

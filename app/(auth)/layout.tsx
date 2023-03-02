@@ -5,7 +5,7 @@ interface AuthLayoutProps {
 }
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {
-  return <div>{children}</div>
+  return <div className="max-w-8xl mx-auto w-full">{children}</div>
 }
 
 export default AuthLayout

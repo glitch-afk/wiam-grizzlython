@@ -4,6 +4,7 @@ export type DRAWER_VIEW =
   | "DASHBOARD_SIDEBAR"
   | "MOBILE_NAV"
   | "PROJECTS_MOBILENAV"
+  | "AUTH_NAV"
 const drawerAtom = atom({ isOpen: false, view: "DASHBOARD_SIDEBAR" })
 
 export function useDrawer() {

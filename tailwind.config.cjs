@@ -1,10 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./app/**/*.{js,ts,jsx,tsx}", "./components/**/*.{js,ts,jsx,tsx}"],
   theme: {
     screens: {
       xs: "500px",
@@ -14,7 +10,7 @@ module.exports = {
       xl: "1280px",
       "2xl": "1440px",
       "3xl": "1780px",
-      "4xl": "2160px", // only need to control product grid mode in ultra 4k device
+      "4xl": "2160px",
     },
     extend: {
       colors: {
@@ -27,6 +23,10 @@ module.exports = {
           500: "#15181E",
           600: "#111318",
           700: "#0D0E12",
+        },
+        brand: {
+          pink: "#F92672",
+          purple: "#8E64FF",
         },
       },
       maxWidth: {
