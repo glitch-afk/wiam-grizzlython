@@ -12,11 +12,11 @@ function HeaderRightArea() {
   return (
     <div className="relative order-last flex shrink-0 items-center gap-4 sm:gap-6 lg:gap-8">
       <MainNav
-        navItems={siteConfig.homeNav}
-        classes="space-x-4 xl:space-x-6 hidden md:flex"
+        mainNavItem={siteConfig.homeNav}
+        mainNavClasses="space-x-4 xl:space-x-6 hidden md:flex"
       />
       <User
-        userClasses="p-2 xl:p-1 bg-brand-700 rounded-full flex space-x-2"
+        userClasses="p-2 xl:p-1 bg-dark-700 rounded-full flex space-x-2"
         navItems={siteConfig.homeNav}
       />
     </div>
@@ -28,7 +28,7 @@ const Header = ({ className }: { className?: string }) => {
   return (
     <nav
       className={cn(
-        "3xl:h-24 bg-brand-600 sticky top-0 right-0 z-30 h-16 w-full transition-all duration-300 sm:h-20",
+        "3xl:h-24 bg-dark-600 sticky top-0 right-0 z-30 h-16 w-full transition-all duration-300 sm:h-20",
         className
       )}
     >

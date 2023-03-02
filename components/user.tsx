@@ -36,7 +36,7 @@ const User = ({
         <DropdownMenu>
           <DropdownMenuTrigger
             className={cn(
-              "text-brand-50 hover:outline-brand-400 flex min-w-fit cursor-pointer items-center p-1 hover:text-white hover:outline-1 focus:outline-none lg:p-2",
+              "text-dark-50 hover:outline-dark-400 flex min-w-fit cursor-pointer items-center p-1 hover:text-white hover:outline-1 focus:outline-none lg:p-2",
               userClasses
             )}
           >

@@ -9,6 +9,7 @@
     "lint": "next lint",
     "preview": "next build && next start",
     "typecheck": "tsc --noEmit",
+    "postinstall": "prisma generate",
     "format:write": "prettier --write \"**/*.{ts,tsx}\" --cache",
     "format:check": "prettier --check \"**/*.{ts,tsx}\" --cache"
   },
@@ -23,6 +24,7 @@
     "@radix-ui/react-scroll-area": "^1.0.2",
     "@radix-ui/react-select": "^1.2.0",
     "@tanstack/react-table": "^8.7.9",
+    "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
     "jotai": "^2.0.2",
     "lucide-react": "^0.115.0",

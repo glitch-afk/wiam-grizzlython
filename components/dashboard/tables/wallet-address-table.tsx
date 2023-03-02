@@ -12,7 +12,7 @@ import {
 } from "@tanstack/react-table"
 
 import { Icons } from "@/components/icons"
-import Button from "@/components/ui/button/button"
+import { Button } from "@/components/ui/button/button"
 import Input from "@/components/ui/input"
 import Scrollbar from "@/components/ui/scrollbar"
 
@@ -80,7 +80,7 @@ const WalletAddressTable = () => {
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="bg-brand-500 group w-fit px-2 py-5 text-left font-normal uppercase first:rounded-l-lg first:pl-6 last:rounded-r-lg last:pr-6 md:px-4"
+                    className="bg-dark-500 group w-fit px-2 py-5 text-left font-normal uppercase first:rounded-l-lg first:pl-6 last:rounded-r-lg last:pr-6 md:px-4"
                   >
                     {header.isPlaceholder
                       ? null
@@ -104,7 +104,7 @@ const WalletAddressTable = () => {
                 {row.getVisibleCells().map((cell) => (
                   <td
                     key={cell.id}
-                    className="text-brand-100 group px-2 py-5 text-left font-normal first:pl-6 last:pr-6 md:px-4"
+                    className="text-dark-100 group px-2 py-5 text-left font-normal first:pl-6 last:pr-6 md:px-4"
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
@@ -116,11 +116,11 @@ const WalletAddressTable = () => {
       </Scrollbar>
       {/* pagination */}
       <div
-        className="bg-brand-500 text-brand-50 mt-6 flex items-center justify-between rounded-lg px-4 py-3 sm:px-6"
+        className="bg-dark-500 text-dark-50 mt-6 flex items-center justify-between rounded-lg px-4 py-3 sm:px-6"
         aria-label="Pagination"
       >
         <div className="hidden sm:block">
-          <p className="text-brand-100 text-sm">
+          <p className="text-dark-100 text-sm">
             Showing{" "}
             <span className="font-medium">
               {table.getState().pagination.pageIndex + 1}{" "}
@@ -128,8 +128,8 @@ const WalletAddressTable = () => {
             of <span className="font-medium">{table.getPageCount()}</span> Pages
           </p>
         </div>
-        <span className="text-brand-200 mx-4">|</span>
-        <span className="text-brand-100 flex items-center gap-1 text-sm">
+        <span className="text-dark-200 mx-4">|</span>
+        <span className="text-dark-100 flex items-center gap-1 text-sm">
           Go to page
           <Input
             type="number"
@@ -138,15 +138,13 @@ const WalletAddressTable = () => {
               const page = e.target.value ? Number(e.target.value) - 1 : 0
               table.setPageIndex(page)
             }}
-            className="text-brand-50 mx-2 w-24"
+            className="text-dark-50 mx-2 w-24"
           />
         </span>
         <div className="flex flex-1 items-center justify-between space-x-2 sm:justify-end xl:space-x-4">
           <Button
             shape="rounded"
-            size="small"
-            color={!table.getCanPreviousPage() ? "primary" : "white"}
-            variant={!table.getCanPreviousPage() ? "ghost" : "solid"}
+            variant={!table.getCanPreviousPage() ? "ghost" : "subtle"}
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
@@ -154,9 +152,7 @@ const WalletAddressTable = () => {
           </Button>
           <Button
             shape="rounded"
-            size="small"
-            color={!table.getCanNextPage() ? "primary" : "white"}
-            variant={!table.getCanNextPage() ? "ghost" : "solid"}
+            variant={!table.getCanNextPage() ? "ghost" : "subtle"}
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >

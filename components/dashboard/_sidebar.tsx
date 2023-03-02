@@ -4,10 +4,10 @@ import { usePathname } from "next/navigation"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button/button"
 import { useDrawer } from "../drawer-views/context"
 import { Icons } from "../icons"
 import Logo from "../site-logo"
-import Button from "../ui/button/button"
 
 const Sidebar = ({ className }: { className?: string }) => {
   const pathname = usePathname()
@@ -15,7 +15,7 @@ const Sidebar = ({ className }: { className?: string }) => {
   return (
     <aside
       className={cn(
-        "bg-brand-600 border-brand-400 xs:w-80 top-0 left-0 z-40 h-full w-full max-w-full border-r xl:fixed xl:w-72 2xl:w-80",
+        "bg-dark-600 border-dark-400 xs:w-80 top-0 left-0 z-40 h-full w-full max-w-full border-r xl:fixed xl:w-72 2xl:w-80",
         className
       )}
     >
@@ -23,10 +23,7 @@ const Sidebar = ({ className }: { className?: string }) => {
         <Logo />
         <Button
           color="primary"
-          shape="circle"
           title="Close"
-          variant="transparent"
-          size="small"
           onClick={() => closeDrawer()}
           className="md:hidden"
         >
@@ -40,10 +37,10 @@ const Sidebar = ({ className }: { className?: string }) => {
             key={idx}
             href={item.disabled ? "#" : (item.href as string)}
             className={cn(
-              "text-brand-100 flex items-center rounded-md p-4 transition-all duration-300 hover:text-white",
+              "text-dark-100 flex items-center rounded-md p-4 transition-all duration-300 hover:text-white",
               item.href === pathname
-                ? "bg-brand-500 font-semibold text-white"
-                : "hover:bg-brand-500"
+                ? "bg-dark-500 font-semibold text-white"
+                : "hover:bg-dark-500"
             )}
           >
             <item.icon className="mr-3 h-6 w-6" />

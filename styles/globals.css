@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  /* For Firfox */
+  scrollbar-color: #15181e #464c57;
+  scrollbar-width: thin;
+}
+
 /* Hide spin button for input type number */
 input.spin-button-hidden::-webkit-outer-spin-button,
 input.spin-button-hidden::-webkit-inner-spin-button {
@@ -17,19 +24,44 @@ input[type="number"] {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  @apply bg-brand-200;
+  @apply bg-dark-200;
 }
 ::-webkit-scrollbar-thumb {
-  @apply bg-brand-600;
+  @apply bg-dark-600;
 }
 ::-webkit-scrollbar-thumb:hover {
-  @apply bg-brand-500;
+  @apply bg-dark-500;
 }
 
+/* underline styles for nav */
+.customUnderline {
+  padding-bottom: 1px;
+  color: white;
+  position: relative;
+}
+
+.customUnderline::after {
+  content: "";
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  left: 0;
+  bottom: 0;
+  opacity: 0;
+  transform: translateY(3px);
+  background: white;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.customUnderline:hover:after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* homepage button */
 .customBtn {
   @apply rounded-full relative bg-white text-black border-none outline-none px-8 py-3 font-bold;
 }
-
 .customBtn::after {
   @apply rounded-full absolute -z-10 -left-[2px] -top-[2px];
   content: "";
@@ -38,8 +70,24 @@ input[type="number"] {
   background: linear-gradient(261.48deg, #8e64ff 11.86%, #f92672 87.19%),
     linear-gradient(276.58deg, #f92672 14.03%, #8e64ff 91.02%);
   filter: blur(5px);
+  transition: all 0.5s ease-in-out;
 }
-
 .customBtn:hover::after {
   filter: blur(15px);
+}
+
+.heroGradient-purple {
+  background: #8e64ff;
+  opacity: 0.3;
+  filter: blur(100px);
+  border-radius: 180.5px;
+  transform: matrix(0.93, 0.36, -0.57, 0.82, 0, 0);
+}
+
+.heroGradient-pink {
+  background: #f92672;
+  opacity: 0.3;
+  filter: blur(150px);
+  border-radius: 180.5px;
+  transform: matrix(0.93, 0.36, -0.57, 0.82, 0, 0);
 }

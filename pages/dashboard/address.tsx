@@ -17,16 +17,16 @@ const AddressPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <DashboardLayout>
-        <div className="bg-brand-600 border-brand-400 w-full rounded-lg border p-4">
+        <div className="bg-dark-600 border-dark-400 w-full rounded-lg border p-4">
           {/* overview cards */}
           <div className="3xl:grid-cols-4 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
             {OverViewCardsData.map(
               ({ title, dataDisplay, percentChange }, idx) => (
                 <div
-                  className="border-brand-400 shadow-card hover:bg-brand-500 rounded-md border p-4"
+                  className="border-dark-400 shadow-card hover:bg-dark-500 rounded-md border p-4"
                   key={idx}
                 >
-                  <span className="text-brand-50 text-sm font-semibold">
+                  <span className="text-dark-50 text-sm font-semibold">
                     {title}
                   </span>
                   <OverviewChart

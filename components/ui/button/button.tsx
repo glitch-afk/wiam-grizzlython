@@ -1,91 +1,74 @@
-import { forwardRef, useImperativeHandle, useRef, useState } from "react"
+import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
-import ButtonDrip from "@/components/ui/button/button-drip"
-import ButtonLoader from "@/components/ui/button/button-loader"
-import type {
-  LoaderSizeTypes,
-  LoaderVariantTypes,
-} from "@/components/ui/loader"
+import { Icons } from "@/components/icons"
+import ButtonDrip from "./button-drip"
 
-type ShapeNames = "rounded" | "pill" | "circle"
-type VariantNames = "ghost" | "solid" | "transparent"
-type ColorNames =
-  | "primary"
-  | "white"
-  | "gray"
-  | "success"
-  | "info"
-  | "warning"
-  | "danger"
-type SizeNames = "large" | "medium" | "small" | "mini"
-
-const shapes: Record<ShapeNames, string[]> = {
-  rounded: ["rounded-md sm:rounded-lg"],
-  pill: ["rounded-full"],
-  circle: ["rounded-full"],
-}
-const variants: Record<VariantNames, string[]> = {
-  ghost: ["bg-transparent"],
-  solid: ["text-white"],
-  transparent: ["bg-transparent hover:bg-brand-600"],
-}
-const colors: Record<ColorNames, string[]> = {
-  primary: ["text-brand-50", "bg-brand-600", "border-none"],
-  white: ["text-gray-900", "bg-white", "border-white"],
-  gray: ["text-gray-900", "bg-gray-100", "border-gray-100"],
-  success: ["text-green-500", "bg-green-500", "border-green-500"],
-  info: ["text-blue-500", "bg-blue-500", "border-blue-500"],
-  warning: ["text-yellow-500", "bg-yellow-500", "border-yellow-500"],
-  danger: ["text-red-500", "bg-red-500", "border-red-500"],
-}
-const sizes: Record<SizeNames, string[]> = {
-  large: ["px-7 sm:px-9 h-11 sm:h-13", "w-11 h-11 sm:w-13 sm:h-13"],
-  medium: ["px-5 sm:px-8 h-10 sm:h-12", "h-10 w-10 sm:w-12 sm:h-12"],
-  small: ["px-7 h-10", "w-10 h-10"],
-  mini: ["px-4 h-8", "w-8 h-8"],
-}
+const buttonVariants = cva(
+  "relative inline-flex shrink-0 overflow-hidden items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring-2 disabled:opacity-50 disabled:pointer-events-none data-[state=open]:bg-dark-500",
+  {
+    variants: {
+      variant: {
+        default: "bg-white text-dark-700 hover:bg-dark-50 focus:ring-white",
+        destructive:
+          "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500",
+        outline: "bg-transparent border border-dark-400 hover:bg-dark-400",
+        subtle:
+          "bg-dark-500 text-dark-50 hover:bg-dark-400 hover:text-white focus:ring-dark-500",
+        ghost:
+          "bg-transparent hover:bg-dark-400 data-[state=open]:bg-transparent focus:ring-dark-400",
+        link: "bg-transparent underline-offset-4 hover:underline text-dark-50 hover:bg-transparent hover:text-white",
+      },
+      size: {
+        default: "h-10 py-2 px-4",
+        sm: "h-9 px-2 rounded-md",
+        lg: "h-11 px-8 rounded-md",
+      },
+      shape: {
+        pill: "rounded-full",
+        rounded: "rounded-md lg:rounded-lg",
+        default: "rounded-md",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+      shape: "default",
+    },
+  }
+)
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
   isLoading?: boolean
   disabled?: boolean
-  shape?: ShapeNames
-  variant?: VariantNames
-  color?: ColorNames
-  size?: SizeNames
   fullWidth?: boolean
-  loaderSize?: LoaderSizeTypes
-  loaderVariant?: LoaderVariantTypes
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       children,
       className,
+      variant,
+      size,
+      shape,
       isLoading,
-      disabled,
       fullWidth,
-      shape = "pill",
-      variant = "solid",
-      color = "primary",
-      size = "medium",
-      loaderSize = "small",
-      loaderVariant = "scaleUp",
       onClick,
-      ...buttonProps
+      ...props
     },
     ref: React.Ref<HTMLButtonElement | null>
   ) => {
-    const [dripShow, setDripShow] = useState<boolean>(false)
-    const [dripX, setDripX] = useState<number>(0)
-    const [dripY, setDripY] = useState<number>(0)
-    const colorClassNames = colors[color]
-    const sizeClassNames = sizes[size]
-    const buttonRef = useRef<HTMLButtonElement>(null)
-    useImperativeHandle(ref, () => buttonRef.current)
+    const [dripShow, setDripShow] = React.useState<boolean>(false)
+    const [dripX, setDripX] = React.useState<number>(0)
+    const [dripY, setDripY] = React.useState<number>(0)
+
+    const buttonRef = React.useRef<HTMLButtonElement>(null)
+    React.useImperativeHandle(ref, () => buttonRef.current)
     function dripCompletedHandle() {
       setDripShow(false)
       setDripX(0)
@@ -101,73 +84,24 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       onClick && onClick(event)
     }
 
-    let buttonColorClassNames = ""
-    let buttonDripColor = ""
-    switch (variant) {
-      case "ghost":
-        buttonColorClassNames = `border-2 border-solid ${colorClassNames[0]} ${colorClassNames[2]}`
-        buttonDripColor = "rgba(0, 0, 0, 0.1)"
-        break
-
-      case "transparent":
-        buttonColorClassNames = `${colorClassNames[0]} ${
-          disabled || isLoading ? "" : "hover:bg-brand-500 focus:bg-brand-600"
-        } `
-        buttonDripColor = "rgba(0, 0, 0, 0.1)"
-        break
-
-      default:
-        buttonColorClassNames = `${colorClassNames[1]} ${colorClassNames[2]}`
-        buttonDripColor = "rgba(255, 255, 255, 0.3)"
-        break
-    }
-
     return (
       <button
+        className={cn(
+          buttonVariants({ variant, size, shape, className }),
+          isLoading && "pointer-events-auto cursor-default focus:outline-none",
+          fullWidth && "w-full"
+        )}
         ref={buttonRef}
         onClick={clickHandler}
-        className={cn(
-          "relative inline-flex shrink-0 items-center justify-center overflow-hidden text-center text-xs font-medium tracking-wider outline-none transition-all sm:text-sm",
-          !disabled
-            ? buttonColorClassNames
-            : "cursor-not-allowed bg-gray-100 text-gray-400",
-          disabled || isLoading || variant === "transparent"
-            ? ""
-            : "hover:shadow-large focus:shadow-large focus:outline-none",
-          isLoading && "pointer-events-auto cursor-default focus:outline-none",
-          fullWidth && "w-full",
-          color === "white" || color === "gray"
-            ? "text-gray-900"
-            : variants[variant],
-          shapes[shape],
-          shape === "circle" ? `${sizeClassNames[1]}` : `${sizeClassNames[0]}`,
-          className
-        )}
-        disabled={disabled}
-        {...buttonProps}
+        {...props}
       >
-        <span
-          className={cn(
-            "inline-flex items-center",
-            isLoading && "invisible opacity-0"
-          )}
-        >
-          {children}
-        </span>
-
-        {isLoading && (
-          <ButtonLoader size={loaderSize} variant={loaderVariant} />
-        )}
-
+        {isLoading && <Icons.loader className="mr-2 h-auto w-5 animate-spin" />}
+        <span>{children}</span>
         {dripShow && (
           <ButtonDrip
             x={dripX}
             y={dripY}
-            color={
-              ["white", "gray"].indexOf(color) !== -1
-                ? "rgba(0, 0, 0, 0.1)"
-                : buttonDripColor
-            }
+            color={"rgba(255, 255, 255, 0.3)"}
             fullWidth={fullWidth}
             onCompleted={dripCompletedHandle}
           />
@@ -176,6 +110,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     )
   }
 )
-
 Button.displayName = "Button"
-export default Button
+
+export { Button, buttonVariants }

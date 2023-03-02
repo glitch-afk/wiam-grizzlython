@@ -51,16 +51,16 @@ const Dashboard = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <DashboardLayout>
-        <div className="bg-brand-600 border-brand-400 w-full rounded-lg border p-4">
+        <div className="bg-dark-600 border-dark-400 w-full rounded-lg border p-4">
           {/* overview cards */}
           <div className="3xl:grid-cols-4 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
             {OverViewCardsData.map(
               ({ title, dataDisplay, percentChange }, idx) => (
                 <div
-                  className="border-brand-400 shadow-card hover:bg-brand-500 rounded-md border p-4"
+                  className="border-dark-400 shadow-card hover:bg-dark-500 rounded-md border p-4"
                   key={idx}
                 >
-                  <span className="text-brand-50 text-sm font-semibold">
+                  <span className="text-dark-50 text-sm font-semibold">
                     {title}
                   </span>
                   <OverviewChart
@@ -93,9 +93,9 @@ const Dashboard = () => {
         </div>
         {/* tables */}
         <div className="mt-6 grid w-full grid-cols-1 gap-4 xl:grid-cols-8 xl:gap-6">
-          <div className="bg-brand-600 border-brand-400 col-span-1 rounded-lg border p-3 md:p-6 xl:col-span-5">
+          <div className="bg-dark-600 border-dark-400 col-span-1 rounded-lg border p-3 md:p-6 xl:col-span-5">
             <div>
-              <h3 className="text-brand-100 text-xl font-semibold">
+              <h3 className="text-dark-100 text-xl font-semibold">
                 Recent Activities
               </h3>
 
@@ -104,8 +104,8 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          <div className="bg-brand-600 border-brand-400 col-span-1 rounded-lg border p-3 md:p-6 xl:col-span-3">
-            <h3 className="text-brand-100 text-xl font-semibold">
+          <div className="bg-dark-600 border-dark-400 col-span-1 rounded-lg border p-3 md:p-6 xl:col-span-3">
+            <h3 className="text-dark-100 text-xl font-semibold">
               Page Performance
             </h3>
             <div className="mt-8 overflow-hidden rounded-lg shadow">

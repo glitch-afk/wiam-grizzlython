@@ -22,7 +22,7 @@ const StatusCard = ({
   return (
     <Link
       href="#"
-      className="bg-brand-500 border-brand-400 shadow-card col-span-1 rounded-md border p-6"
+      className="bg-dark-700/50 hover:bg-dark-700 hover:border-dark-400 border-dark-400 shadow-card col-span-1 rounded-md border p-6"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
@@ -32,7 +32,7 @@ const StatusCard = ({
           </Avatar>
           <div>
             <h3 className="text-base font-bold sm:text-lg">{cardTitle}</h3>
-            <p className="text-brand-100 text-sm">
+            <p className="text-dark-100 text-sm">
               {listingDate && `listed on ${listingDate}`}
             </p>
           </div>
@@ -40,7 +40,7 @@ const StatusCard = ({
         {/* status pill */}
         <div
           className={cn(
-            "bg-brand-700 rounded-full px-2 text-xs font-medium text-white md:text-sm",
+            "bg-dark-700 rounded-full px-2 text-xs font-medium text-white md:text-sm",
             status === "SUCCESS" && "bg-green-300/30 text-green-500",
             status === "FAILED" && "bg-red-300/30 text-red-500"
           )}
@@ -51,7 +51,7 @@ const StatusCard = ({
           &nbsp; •
         </div>
       </div>
-      <p className="text-brand-100 mt-3 w-full overflow-hidden text-ellipsis break-all text-sm md:text-base">
+      <p className="text-dark-100 mt-3 w-full overflow-hidden text-ellipsis break-all text-sm md:text-base">
         {cardDescription}
       </p>
     </Link>

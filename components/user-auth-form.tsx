@@ -9,7 +9,7 @@ import { siteRoutes } from "@/config/site"
 import { userAuthSchema } from "@/lib/schema"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
-import Button from "@/components/ui/button"
+import { Button } from "@/components/ui/button/button"
 import Input from "@/components/ui/input"
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -63,7 +63,7 @@ const UserAuthForm = ({
   return (
     <div
       className={cn(
-        "border-brand-500 bg-brand-600 w-full max-w-md rounded-xl border-2 px-6 py-12",
+        "border-dark-500 bg-dark-600 w-full max-w-md rounded-xl border-2 px-6 py-12",
         className
       )}
       {...props}
@@ -72,10 +72,9 @@ const UserAuthForm = ({
 
       {/* signin with google */}
       <Button
-        className="bg-brand-500 text-brand-100 mt-4 w-full"
+        className="bg-dark-500 text-dark-100 mt-4 w-full"
         variant="ghost"
         shape="rounded"
-        size="small"
         color="primary"
         onClick={() =>
           signIn("google", {
@@ -108,7 +107,6 @@ const UserAuthForm = ({
           className="mt-4 font-semibold"
           isLoading={isLoading}
           color="white"
-          size="small"
           shape="rounded"
         >
           Continue with Email

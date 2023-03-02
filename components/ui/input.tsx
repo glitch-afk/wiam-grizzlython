@@ -31,7 +31,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {label && (
           <span
             className={cn(
-              "text-brand-100 block font-medium",
+              "text-dark-100 block font-medium",
               useUppercaseLabel ? "mb-1 uppercase sm:mb-2" : "mb-1"
             )}
           >
@@ -49,7 +49,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           ref={ref}
           {...props}
           className={cn(
-            "bg-brand-500 placeholder:text-brand-200 border-brand-400 focus:ring-brand-300 focus:border-brand-300 disabled:border-brand-200 disabled:bg-brand-400 mt-1 block h-10 w-full  rounded-md border px-4 py-2 text-sm transition-shadow duration-200 focus:outline-none focus:ring-1 focus:invalid:border-red-500 focus:invalid:ring-red-500 disabled:text-gray-500 sm:h-12 sm:rounded-lg",
+            "bg-dark-500 placeholder:text-dark-200 border-dark-400 focus:ring-dark-300 focus:border-dark-300 disabled:border-dark-200 disabled:bg-dark-400 mt-1 block h-10 w-full  rounded-md border px-4 py-2 text-sm transition-shadow duration-200 focus:outline-none focus:ring-1 focus:invalid:border-red-500 focus:invalid:ring-red-500 disabled:text-gray-500 sm:h-12 sm:rounded-lg",
             inputClassName
           )}
         />

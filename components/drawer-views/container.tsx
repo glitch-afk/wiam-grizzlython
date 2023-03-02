@@ -3,18 +3,22 @@ import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
 import { Dialog, Transition } from "@headlessui/react"
 
+import { siteConfig } from "@/config/site"
+import MobileNav from "../mobile-nav"
 import { DRAWER_VIEW, useDrawer } from "./context"
 
 const Sidebar = dynamic(() => import("@/components/dashboard/_sidebar"))
 
-function renderDrawerContent(view: DRAWER_VIEW | string) {
+function renderDrawerContent(view?: DRAWER_VIEW | string) {
   switch (view) {
     case "DASHBOARD_SIDEBAR":
       return <Sidebar />
     case "MOBILE_NAV":
-      return null
+      return <MobileNav mobileNavItems={siteConfig.mainNav} />
+    case "PROJECTS_MOBILENAV":
+      return <MobileNav mobileNavItems={siteConfig.homeNav} />
     default:
-      return null
+      return <MobileNav />
   }
 }
 

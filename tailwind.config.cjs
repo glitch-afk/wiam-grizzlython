@@ -23,7 +23,7 @@ module.exports = {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
       colors: {
-        brand: {
+        dark: {
           50: "#CED0D3",
           100: "#A7ABB4",
           200: "#464C57",
@@ -32,6 +32,10 @@ module.exports = {
           500: "#15181E",
           600: "#111318",
           700: "#0D0E12",
+        },
+        brand: {
+          pink: "#F92672",
+          purple: "#8E64FF",
         },
       },
       maxWidth: {

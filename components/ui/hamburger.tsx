@@ -1,4 +1,4 @@
-import Button, { type ButtonProps } from "@/components/ui/button"
+import { Button, type ButtonProps } from "@/components/ui/button/button"
 
 interface HamburgerProps extends ButtonProps {
   isOpen?: boolean
@@ -6,7 +6,7 @@ interface HamburgerProps extends ButtonProps {
 
 export default function Hamburger({ isOpen, ...props }: HamburgerProps) {
   return (
-    <Button aria-label="Hamburger" shape="circle" {...props}>
+    <Button aria-label="Hamburger" shape="pill" variant={"ghost"} {...props}>
       <svg
         className="sm:w-auo h-auto w-6"
         width="30"

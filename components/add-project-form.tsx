@@ -2,7 +2,7 @@ import React from "react"
 
 import { cn } from "@/lib/utils"
 import Input from "@/components/ui/input"
-import Button from "./ui/button"
+import { Button } from "./ui/button/button"
 
 interface AddProjectFormProps extends React.HTMLAttributes<HTMLDivElement> {
   cardTitle?: string
@@ -18,13 +18,13 @@ const AddProjectForm = ({
   return (
     <div
       className={cn(
-        "border-brand-500 bg-brand-600 w-full max-w-md rounded-xl border-2 px-6 py-12",
+        "border-dark-500 bg-dark-600 w-full max-w-md rounded-xl border-2 px-6 py-12",
         className
       )}
       {...props}
     >
       <h2 className="mb-5 text-center text-xl font-semibold">{cardTitle}</h2>
-      <p className="text-brand-100 text-center text-sm md:text-base">
+      <p className="text-dark-100 text-center text-sm md:text-base">
         Adding your project will help you to track and analyze your project
         metrics.
       </p>

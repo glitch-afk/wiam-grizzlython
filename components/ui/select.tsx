@@ -17,7 +17,7 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "border-brand-300 placeholder:text-brand-400 flex h-10 w-full items-center justify-between rounded-md border bg-transparent py-2 px-3 text-sm focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+      "border-dark-300 placeholder:text-dark-400 flex h-10 w-full items-center justify-between rounded-md border bg-transparent py-2 px-3 text-sm focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
       className
     )}
     {...props}
@@ -36,7 +36,7 @@ const SelectContent = React.forwardRef<
     <SelectPrimitive.Content
       ref={ref}
       className={cn(
-        "animate-in fade-in-80 bg-brand-500 text-brand-100 border-brand-400 relative z-50 min-w-[8rem] overflow-hidden rounded-md border shadow-md",
+        "animate-in fade-in-80 bg-dark-500 text-dark-100 border-dark-400 relative z-50 min-w-[8rem] overflow-hidden rounded-md border shadow-md",
         className
       )}
       {...props}
@@ -56,7 +56,7 @@ const SelectLabel = React.forwardRef<
   <SelectPrimitive.Label
     ref={ref}
     className={cn(
-      "text-brand-100 py-1.5 pr-2 pl-8 text-sm font-semibold ",
+      "text-dark-100 py-1.5 pr-2 pl-8 text-sm font-semibold ",
       className
     )}
     {...props}
@@ -71,7 +71,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "focus:bg-brand-400 relative flex cursor-default select-none items-center rounded-sm py-1.5 pr-2 pl-8 text-sm font-medium outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "focus:bg-dark-400 relative flex cursor-default select-none items-center rounded-sm py-1.5 pr-2 pl-8 text-sm font-medium outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className
     )}
     {...props}
@@ -93,7 +93,7 @@ const SelectSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Separator
     ref={ref}
-    className={cn("bg-brand-200 -mx-1 my-1 h-px", className)}
+    className={cn("bg-dark-200 -mx-1 my-1 h-px", className)}
     {...props}
   />
 ))

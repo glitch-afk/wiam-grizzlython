@@ -1,43 +1,25 @@
-import React, { useRef, useState } from "react"
-import type { NavItem } from "@/types"
-import { useOnClickOutside } from "usehooks-ts"
+import React from "react"
 
-import MobileNav from "@/components/mobile-nav"
+import { DRAWER_VIEW, useDrawer } from "@/components/drawer-views/context"
 import Logo from "@/components/site-logo"
 import Hamburger from "@/components/ui/hamburger"
 
-interface ISiteHeaderProps {
+interface SiteHeaderProps {
   children?: React.ReactNode
-  navItems?: NavItem[]
+  drawer: DRAWER_VIEW
 }
 
-const SiteHeader = ({ children, navItems }: ISiteHeaderProps) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const ref = useRef(null)
-
-  const handleClickOutside = () => {
-    setIsOpen(false)
-  }
-  useOnClickOutside(ref, handleClickOutside)
-
+const SiteHeader = ({ children, drawer }: SiteHeaderProps) => {
+  const { openDrawer } = useDrawer()
   return (
-    <div className="max-w-8xl z-50 mx-auto w-full p-6 2xl:px-0">
-      <div className="flex w-full items-center justify-between">
+    <header className="max-w-8xl mx-auto flex w-full items-center justify-between p-6 2xl:px-0">
+      <div className="w-full justify-start">
         <Logo />
-        {children}
-        <div className="justify-end md:hidden" ref={ref}>
-          <Hamburger
-            isOpen={isOpen}
-            onClick={() => setIsOpen(isOpen ? false : true)}
-          />
-        </div>
       </div>
-      {isOpen ? (
-        <div className="md:hidden">
-          <MobileNav navItems={navItems} ref={ref} />
-        </div>
-      ) : null}
-    </div>
+      <>{children}</>
+
+      <Hamburger onClick={() => openDrawer(drawer)} className="lg:hidden" />
+    </header>
   )
 }
 

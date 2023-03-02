@@ -6,7 +6,7 @@ import { siteRoutes } from "@/config/site"
 import AddProjectForm from "@/components/add-project-form"
 import { Icons } from "@/components/icons"
 import SiteHeader from "@/components/site-header"
-import Button from "@/components/ui/button"
+import { Button } from "@/components/ui/button/button"
 
 const AddProject = () => {
   return (
@@ -15,10 +15,10 @@ const AddProject = () => {
         <title>WIAM - Add Project</title>
         <meta name="description" content="Add new Project" />
       </Head>
-      <SiteHeader>
+      <SiteHeader drawer="AUTH_NAV">
         <Link className="hidden md:flex" href={siteRoutes.home}>
-          <Button shape="rounded" className="text-brand-50 hover:text-white">
-            <Icons.upRight className="mr-2 h-auto w-4" />
+          <Button shape="rounded" variant={"subtle"}>
+            <Icons.upRight className="mr-2 inline h-auto w-4" />
             All Projects
           </Button>
         </Link>
