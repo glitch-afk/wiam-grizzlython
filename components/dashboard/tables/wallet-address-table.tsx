@@ -249,9 +249,10 @@ function DebouncedInput({
   }, [value])
 
   return (
-    <Input
+    <input
       {...props}
       value={value}
+      className="bg-dark-600 text-brand-50 placeholder:text-dark-200 focus:ring-dark-400 rounded-md border-none outline-none focus:outline-none focus:ring-1"
       onChange={(e) => setValue(e.target.value)}
     />
   )
