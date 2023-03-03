@@ -88,7 +88,7 @@ const columns = [
       <a
         href={info.getValue()}
         target="_blank"
-        className="underline underline-offset-2 hover:text-white"
+        className="hover:text-brand-purple whitespace-nowrap underline underline-offset-2"
         rel="noreferrer"
       >
         View Details
@@ -126,7 +126,7 @@ const WalletAddressTable = () => {
                     key={header.id}
                     className="bg-dark-500 group w-fit px-2 py-5 text-left font-normal first:rounded-tl-lg first:pl-6 last:rounded-tr-lg last:pr-6 md:px-4"
                   >
-                    <Collapsible>
+                    <Collapsible className="max-w-[16rem]">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -298,10 +298,10 @@ function DebouncedInput({
   }, [value])
 
   return (
-    <input
+    <Input
       {...props}
       value={value}
-      className="bg-dark-600 text-brand-50 placeholder:text-dark-200 focus:ring-dark-400 rounded-md border-none outline-none focus:outline-none focus:ring-1"
+      className="w-full"
       onChange={(e) => setValue(e.target.value)}
     />
   )
