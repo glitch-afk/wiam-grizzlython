@@ -71,16 +71,16 @@ const WalletAddressTable = () => {
   })
 
   return (
-    <>
+    <div className="border-dark-400 rounded-lg border">
       <Scrollbar style={{ width: "100%", height: "500px" }} autoHide="scroll">
         <table className="w-full">
-          <thead className="sticky top-0 rounded-lg text-sm text-white">
+          <thead className="sticky top-0 rounded-t-lg text-sm text-white">
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="bg-dark-500 group w-fit px-2 py-5 text-left font-normal uppercase first:rounded-l-lg first:pl-6 last:rounded-r-lg last:pr-6 md:px-4"
+                    className="bg-dark-500 group w-fit px-2 py-5 text-left font-normal uppercase first:rounded-tl-lg first:pl-6 last:rounded-tr-lg last:pr-6 md:px-4"
                   >
                     {header.isPlaceholder
                       ? null
@@ -100,7 +100,7 @@ const WalletAddressTable = () => {
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
+              <tr key={row.id} className="hover:bg-dark-500">
                 {row.getVisibleCells().map((cell) => (
                   <td
                     key={cell.id}
@@ -116,10 +116,10 @@ const WalletAddressTable = () => {
       </Scrollbar>
       {/* pagination */}
       <div
-        className="bg-dark-500 text-dark-50 mt-6 flex items-center justify-between rounded-lg px-4 py-3 sm:px-6"
+        className="bg-dark-500 text-dark-50 mt-6 flex items-start justify-between rounded-b-lg px-4 py-3 sm:px-6 md:items-center"
         aria-label="Pagination"
       >
-        <div className="hidden sm:block">
+        <div className="flex flex-col items-start space-y-4 md:flex-row md:items-center md:space-y-0">
           <p className="text-dark-100 text-sm">
             Showing{" "}
             <span className="font-medium">
@@ -127,21 +127,21 @@ const WalletAddressTable = () => {
             </span>
             of <span className="font-medium">{table.getPageCount()}</span> Pages
           </p>
+          <span className="text-dark-200 mx-4 hidden md:block">|</span>
+          <span className="text-dark-100 flex items-center gap-1 text-sm">
+            Go to page
+            <Input
+              type="number"
+              defaultValue={table.getState().pagination.pageIndex + 1}
+              onChange={(e) => {
+                const page = e.target.value ? Number(e.target.value) - 1 : 0
+                table.setPageIndex(page)
+              }}
+              className="text-dark-50 mx-2 w-24"
+            />
+          </span>
         </div>
-        <span className="text-dark-200 mx-4">|</span>
-        <span className="text-dark-100 flex items-center gap-1 text-sm">
-          Go to page
-          <Input
-            type="number"
-            defaultValue={table.getState().pagination.pageIndex + 1}
-            onChange={(e) => {
-              const page = e.target.value ? Number(e.target.value) - 1 : 0
-              table.setPageIndex(page)
-            }}
-            className="text-dark-50 mx-2 w-24"
-          />
-        </span>
-        <div className="flex flex-1 items-center justify-between space-x-2 sm:justify-end xl:space-x-4">
+        <div className="flex items-center justify-between space-x-2 sm:justify-end xl:space-x-4">
           <Button
             shape="rounded"
             variant={!table.getCanPreviousPage() ? "ghost" : "subtle"}
@@ -160,7 +160,7 @@ const WalletAddressTable = () => {
           </Button>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
@@ -245,7 +245,7 @@ function DebouncedInput({
     }, debounce)
 
     return () => clearTimeout(timeout)
-  }, [value])
+  }, [debounce, onChange, value])
 
   return (
     <Input
