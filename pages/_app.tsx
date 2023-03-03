@@ -6,6 +6,9 @@ import { type Session } from "next-auth"
 import { SessionProvider } from "next-auth/react"
 
 import "overlayscrollbars/overlayscrollbars.css"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+
 import DrawersContainer from "@/components/drawer-views/container"
 
 const fontSans = FontSans({
@@ -13,6 +16,8 @@ const fontSans = FontSans({
   variable: "--font-sans",
   display: "swap",
 })
+
+const queryClient = new QueryClient()
 
 const App: AppType<{ session: Session | null }> = ({
   Component,
@@ -26,8 +31,11 @@ const App: AppType<{ session: Session | null }> = ({
 				}
 			}`}</style>
       <SessionProvider session={session}>
-        <Component {...pageProps} />
-        <DrawersContainer />
+        <QueryClientProvider client={queryClient}>
+          <Component {...pageProps} />
+          <DrawersContainer />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
       </SessionProvider>
     </>
   )

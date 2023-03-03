@@ -1,5 +1,6 @@
 import React from "react"
 import { AddressData, fakeWalletAddressData } from "@/data/tableData"
+import { Query, useQuery } from "@tanstack/react-query"
 import {
   Column,
   Table,
@@ -97,15 +98,21 @@ const columns = [
 ]
 
 const WalletAddressTable = () => {
-  const [data, _setData] = React.useState(fakeWalletAddressData)
+  const { data: tableData, isLoading } = useQuery({
+    queryKey: ["tableData"],
+    queryFn: () => fakeWalletAddressData(100),
+    refetchOnWindowFocus: false,
+  })
 
   const table = useReactTable({
-    data,
+    data: tableData ?? [],
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   })
+
+  if (isLoading) return <>Loading ...</>
 
   return (
     <div className="border-dark-400 rounded-lg border">
@@ -158,7 +165,7 @@ const WalletAddressTable = () => {
       </Scrollbar>
       {/* pagination */}
       <div
-        className="bg-dark-500 text-dark-50 mt-6 flex items-start justify-between rounded-b-lg px-4 py-3 sm:px-6 md:items-center"
+        className="bg-dark-500 text-dark-50 flex items-start justify-between rounded-b-lg px-4 py-3 sm:px-6 md:items-center"
         aria-label="Pagination"
       >
         <div className="flex flex-col items-start space-y-4 md:flex-row md:items-center md:space-y-0">
