@@ -68,8 +68,8 @@ export const siteConfig: SiteConfig = {
     },
     {
       title: "Transaction",
-      href: "#",
-      disabled: true,
+      href: "/dashboard/transaction",
+      disabled: false,
       external: false,
       icon: Icons.transaction,
     },

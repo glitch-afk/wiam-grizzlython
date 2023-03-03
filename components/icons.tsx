@@ -3,6 +3,7 @@ import {
   Bell,
   CheckCircle2,
   ChevronRight,
+  ChevronsUpDown,
   CornerUpRight,
   Eye,
   Home,
@@ -38,6 +39,7 @@ export const Icons = {
   transaction: ArrowLeftRight,
   email: Mail,
   eye: Eye,
+  upDown: ChevronsUpDown,
   logo: (props: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

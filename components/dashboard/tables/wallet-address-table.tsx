@@ -13,6 +13,11 @@ import {
 
 import { Icons } from "@/components/icons"
 import { Button } from "@/components/ui/button/button"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
 import Input from "@/components/ui/input"
 import Scrollbar from "@/components/ui/scrollbar"
 
@@ -21,12 +26,20 @@ const columnHelper = createColumnHelper<AddressData>()
 const columns = [
   columnHelper.accessor("walletAddress", {
     header: () => (
-      <span className="w-fit whitespace-nowrap">Wallet Address</span>
+      <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
+        Wallet Address
+        <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
+      </CollapsibleTrigger>
     ),
     cell: (info) => <span className="truncate">{info.getValue()}</span>,
   }),
   columnHelper.accessor("chain", {
-    header: () => <span className="w-fit whitespace-nowrap">Chain</span>,
+    header: () => (
+      <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
+        Chain
+        <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
+      </CollapsibleTrigger>
+    ),
     cell: (info) => (
       <div className="flex items-center">
         {info.getValue().toLowerCase() === "solana" ? (
@@ -41,21 +54,45 @@ const columns = [
   }),
   columnHelper.accessor("sessions", {
     header: () => (
-      <span className="w-fit whitespace-nowrap">Total Sessions</span>
+      <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
+        Total Sessions
+        <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
+      </CollapsibleTrigger>
     ),
     cell: (info) => <span>{info.getValue()} sessions</span>,
   }),
   columnHelper.accessor("transactionVolume", {
     header: () => (
-      <span className="w-fit whitespace-nowrap">Transaction Volume</span>
+      <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
+        Transaction Volume
+        <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
+      </CollapsibleTrigger>
     ),
     cell: (info) => <span>{info.getValue()} USDC</span>,
   }),
   columnHelper.accessor("transactionExecuted", {
     header: () => (
-      <span className="w-fit whitespace-nowrap">Transaction Executed</span>
+      <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
+        Transaction Executed
+        <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
+      </CollapsibleTrigger>
     ),
     cell: (info) => <span>{info.getValue()} tx</span>,
+  }),
+  columnHelper.accessor("details", {
+    header: () => (
+      <span className="w-fit whitespace-nowrap font-semibold">Details</span>
+    ),
+    cell: (info) => (
+      <a
+        href={info.getValue()}
+        target="_blank"
+        className="underline underline-offset-2"
+        rel="noreferrer"
+      >
+        View Details
+      </a>
+    ),
   }),
 ]
 
@@ -80,19 +117,24 @@ const WalletAddressTable = () => {
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="bg-dark-500 group w-fit px-2 py-5 text-left font-normal uppercase first:rounded-tl-lg first:pl-6 last:rounded-tr-lg last:pr-6 md:px-4"
+                    className="bg-dark-500 group w-fit px-2 py-5 text-left font-normal first:rounded-tl-lg first:pl-6 last:rounded-tr-lg last:pr-6 md:px-4"
                   >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                    {header.column.getCanFilter() ? (
-                      <div className="mt-2">
-                        <Filter column={header.column} table={table} />
-                      </div>
-                    ) : null}
+                    <Collapsible>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+
+                      <CollapsibleContent>
+                        {header.column.getCanFilter() ? (
+                          <div className="mt-2">
+                            <Filter column={header.column} table={table} />
+                          </div>
+                        ) : null}
+                      </CollapsibleContent>
+                    </Collapsible>
                   </th>
                 ))}
               </tr>
