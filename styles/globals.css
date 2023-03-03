@@ -102,3 +102,36 @@ input[type="number"] {
   border-radius: 180.5px;
   transform: matrix(0.93, 0.36, -0.57, 0.82, 0, 0);
 }
+
+/* collapsible open/close animations */
+.CollapsibleContent {
+  overflow: hidden;
+}
+.CollapsibleContent[data-state="open"] {
+  animation: slideDown 300ms ease-out;
+}
+.CollapsibleContent[data-state="closed"] {
+  animation: slideUp 300ms ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+    width: 0;
+  }
+  to {
+    height: var(--radix-collapsible-content-height);
+    width: var(--radix-collapsible-content-width);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-collapsible-content-height);
+    width: var(--radix-collapsible-content-width);
+  }
+  to {
+    height: 0;
+    width: 0;
+  }
+}

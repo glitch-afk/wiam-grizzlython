@@ -134,7 +134,7 @@ const WalletAddressTable = () => {
                             header.getContext()
                           )}
 
-                      <CollapsibleContent>
+                      <CollapsibleContent className="CollapsibleContent">
                         {header.column.getCanFilter() ? (
                           <div className="mt-2">
                             <Filter column={header.column} table={table} />
