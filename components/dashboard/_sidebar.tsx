@@ -22,8 +22,9 @@ const Sidebar = ({ className }: { className?: string }) => {
       <div className="relative flex h-24 items-center justify-between overflow-hidden px-6 py-4 2xl:px-8">
         <Logo />
         <Button
-          color="primary"
           title="Close"
+          variant={"subtle"}
+          shape={"pill"}
           onClick={() => closeDrawer()}
           className="md:hidden"
         >

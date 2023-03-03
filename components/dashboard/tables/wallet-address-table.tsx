@@ -88,7 +88,7 @@ const columns = [
       <a
         href={info.getValue()}
         target="_blank"
-        className="underline underline-offset-2"
+        className="underline underline-offset-2 hover:text-white"
         rel="noreferrer"
       >
         View Details

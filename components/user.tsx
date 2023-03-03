@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Icons } from "./icons"
 
-const Loader = () => {
+export const Loader = () => {
   return <Icons.loader className="h-auto w-5 animate-spin text-white" />
 }
 
@@ -40,11 +40,15 @@ const User = ({
               userClasses
             )}
           >
-            <Avatar className="h-auto w-6 sm:w-8">
+            <Avatar className="h-auto w-8">
               <AvatarImage src={session?.user.image as string} />
               <AvatarFallback>W</AvatarFallback>
             </Avatar>
-            <span className="text-sm md:hidden lg:flex">
+            <span
+              className={cn(
+                "text-brand-50 max-w-[100px] overflow-hidden truncate text-sm hover:text-white md:max-w-full"
+              )}
+            >
               {session?.user.email}
             </span>
             {/* </div> */}

@@ -35,7 +35,7 @@ const Header = ({ className }: { className?: string }) => {
       <div className="3xl:px-10 flex h-full items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center">
           <Hamburger
-            className="flex xl:hidden"
+            className="mr-2 flex xl:hidden"
             onClick={() => openDrawer("DASHBOARD_SIDEBAR")}
           />
           <div className="xl:hidden">

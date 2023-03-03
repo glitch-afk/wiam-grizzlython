@@ -49,7 +49,7 @@ export default function DrawersContainer() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Dialog.Overlay className="bg-brand-700/60 fixed inset-0 backdrop-blur" />
+          <Dialog.Overlay className="bg-dark-700/60 fixed inset-0 backdrop-blur" />
         </Transition.Child>
         <Transition.Child
           as={Fragment}
