@@ -20,7 +20,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
-const strokeColors = ["#9747FF", "#F92672", "#4DA765", "#FF8947"]
+export const strokeColors = ["#9747FF", "#F92672", "#4DA765", "#FF8947"]
 
 const Dashboard = () => {
   const [transactionChartData, setTransactionChartData] =

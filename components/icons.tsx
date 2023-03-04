@@ -1,6 +1,7 @@
 import {
   ArrowLeftRight,
   Bell,
+  Check,
   CheckCircle2,
   ChevronRight,
   ChevronsUpDown,
@@ -13,6 +14,8 @@ import {
   Mail,
   Menu,
   Plus,
+  RefreshCcw,
+  Slash,
   Twitter,
   Wallet,
   X,
@@ -39,7 +42,10 @@ export const Icons = {
   transaction: ArrowLeftRight,
   email: Mail,
   eye: Eye,
+  check: Check,
   upDown: ChevronsUpDown,
+  reload: RefreshCcw,
+  slash: Slash,
   logo: (props: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

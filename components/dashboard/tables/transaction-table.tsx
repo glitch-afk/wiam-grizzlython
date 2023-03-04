@@ -1,5 +1,5 @@
 import React from "react"
-import { AddressData, fakeWalletAddressData } from "@/data/tableData"
+import { fakeTransactionData, transactionTableData } from "@/data/tableData"
 import { useQuery } from "@tanstack/react-query"
 import {
   Column,
@@ -12,6 +12,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 
+import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
 import { Button } from "@/components/ui/button/button"
 import {
@@ -22,13 +23,22 @@ import {
 import Input from "@/components/ui/input"
 import Scrollbar from "@/components/ui/scrollbar"
 
-const columnHelper = createColumnHelper<AddressData>()
+const columnHelper = createColumnHelper<transactionTableData>()
 
 const columns = [
   columnHelper.accessor("walletAddress", {
     header: () => (
       <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
         Wallet Address
+        <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
+      </CollapsibleTrigger>
+    ),
+    cell: (info) => <span className="truncate">{info.getValue()}</span>,
+  }),
+  columnHelper.accessor("transactionId", {
+    header: () => (
+      <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
+        Transaction Id
         <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
       </CollapsibleTrigger>
     ),
@@ -53,32 +63,43 @@ const columns = [
       </div>
     ),
   }),
-  columnHelper.accessor("sessions", {
+  columnHelper.accessor("amount", {
     header: () => (
       <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
-        Total Sessions
+        Amount
         <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
       </CollapsibleTrigger>
     ),
-    cell: (info) => <span>{info.getValue()} sessions</span>,
+    cell: (info) => <span>{info.getValue()} SOL</span>,
   }),
-  columnHelper.accessor("transactionVolume", {
+  columnHelper.accessor("status", {
     header: () => (
       <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
-        Transaction Volume
+        Status
         <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
       </CollapsibleTrigger>
     ),
-    cell: (info) => <span>{info.getValue()} USDC</span>,
-  }),
-  columnHelper.accessor("transactionExecuted", {
-    header: () => (
-      <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
-        Transaction Executed
-        <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
-      </CollapsibleTrigger>
+    cell: (info) => (
+      <div
+        className={cn(
+          "text-dark-700 w-fit whitespace-nowrap rounded-full px-4 py-1 text-xs md:text-sm",
+          info.getValue() === "SUCCESS" && "bg-green-400",
+          info.getValue() === "PENDING" && "bg-yellow-500",
+          info.getValue() === "FAILED" && "bg-red-500"
+        )}
+      >
+        {info.getValue() === "SUCCESS" && (
+          <Icons.check className="mr-1 inline h-auto w-4" />
+        )}
+        {info.getValue() === "FAILED" && (
+          <Icons.slash className="mr-1 inline h-auto w-4" />
+        )}
+        {info.getValue() === "PENDING" && (
+          <Icons.reload className="mr-1 inline h-auto w-4" />
+        )}
+        <span>{info.getValue()}</span>
+      </div>
     ),
-    cell: (info) => <span>{info.getValue()} tx</span>,
   }),
   columnHelper.accessor("details", {
     header: () => (
@@ -97,10 +118,10 @@ const columns = [
   }),
 ]
 
-const WalletAddressTable = () => {
+const TransactionTable = () => {
   const { data: tableData, isLoading } = useQuery({
     queryKey: ["tableData"],
-    queryFn: () => fakeWalletAddressData(100),
+    queryFn: () => fakeTransactionData(100),
     refetchOnWindowFocus: false,
   })
 
@@ -307,4 +328,4 @@ function DebouncedInput({
   )
 }
 
-export default WalletAddressTable
+export default TransactionTable
