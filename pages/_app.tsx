@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 
 import DrawersContainer from "@/components/drawer-views/container"
+import { Toaster } from "@/components/ui/toaster"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -34,6 +35,7 @@ const App: AppType<{ session: Session | null }> = ({
         <QueryClientProvider client={queryClient}>
           <Component {...pageProps} />
           <DrawersContainer />
+          <Toaster />
           <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </SessionProvider>

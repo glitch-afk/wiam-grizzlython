@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form"
 import type { z } from "zod"
 
 import { siteRoutes } from "@/config/site"
+import { toast } from "@/lib/hooks/use-toast"
 import { userAuthSchema } from "@/lib/schema"
 import { cn } from "@/lib/utils"
 import { Icons } from "@/components/icons"
@@ -40,23 +41,22 @@ const UserAuthForm = ({
     const signInResult = await signIn("email", {
       email: data.email.toLowerCase(),
       redirect: false,
-      callbackUrl: searchParams.get("from") || "/",
+      callbackUrl: searchParams.get("from") || "/projects",
     })
 
     setIsLoading(false)
 
     if (!signInResult?.ok) {
-      console.log({
+      return toast({
         title: "Something went wrong.",
-        message: "Your sign in request failed. Please try again.",
-        type: "error",
+        description: "Your sign in request failed. Please try again.",
+        variant: "destructive",
       })
     }
 
-    console.log({
+    return toast({
       title: "Check your email",
-      message: "We sent you a login link. Be sure to check your spam too.",
-      type: "success",
+      description: "We sent you a login link. Be sure to check your spam too.",
     })
   }
 
@@ -76,6 +76,7 @@ const UserAuthForm = ({
         variant="ghost"
         shape="rounded"
         color="primary"
+        disabled={isLoading}
         onClick={() =>
           signIn("google", {
             callbackUrl: searchParams.get("from") || siteRoutes.home,
