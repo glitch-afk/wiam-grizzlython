@@ -4,14 +4,15 @@ import { OverViewCardsData } from "@/data"
 
 import OverviewChart from "@/components/charts/overview"
 import DashboardLayout from "@/components/dashboard/_layout"
-import TransactionTable from "@/components/dashboard/tables/transaction-table"
-import { strokeColors } from "./[id]"
+import WalletAddressTable from "@/components/dashboard/tables/wallet-address-table"
 
-const TransactionPage = () => {
+const strokeColors = ["#9747FF", "#F92672", "#4DA765", "#FF8947"]
+
+const AddressPage = () => {
   return (
     <>
       <Head>
-        <title>Transaction</title>
+        <title>Address</title>
         <meta name="description" content="Analytics for Web3" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -39,13 +40,13 @@ const TransactionPage = () => {
           </div>
         </div>
 
-        {/* transaction table */}
+        {/* wallet address table */}
         <div className="mt-8 w-full">
-          <TransactionTable />
+          <WalletAddressTable />
         </div>
       </DashboardLayout>
     </>
   )
 }
 
-export default TransactionPage
+export default AddressPage

@@ -5,7 +5,7 @@ import { OverViewCardsData } from "@/data"
 import OverviewChart from "@/components/charts/overview"
 import DashboardLayout from "@/components/dashboard/_layout"
 import TransactionTable from "@/components/dashboard/tables/transaction-table"
-import { strokeColors } from "./[id]"
+import { strokeColors } from "../[id]"
 
 const TransactionPage = () => {
   return (

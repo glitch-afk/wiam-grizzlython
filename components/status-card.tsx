@@ -7,13 +7,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 export type STATUS_TYPE = "SUCCESS" | "FAILED" | "DEFAULT"
 
 interface IStatusCardProps {
-  cardTitle?: string
+  cardId: string,
+  cardTitle: string
   cardDescription?: string
   listingDate?: string
   status: STATUS_TYPE | string
 }
 
 const StatusCard = ({
+  cardId,
   cardTitle,
   cardDescription,
   listingDate,
@@ -21,14 +23,14 @@ const StatusCard = ({
 }: IStatusCardProps) => {
   return (
     <Link
-      href="#"
+      href={`/dashboard?id=${cardId}`}
       className="bg-dark-700/50 hover:bg-dark-700 hover:border-dark-400 border-dark-400 shadow-card col-span-1 rounded-md border p-6"
     >
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <Avatar className="h-10 w-10 md:h-12 md:w-12">
             <AvatarImage src="" /> {/* Fetch url favicon  */}
-            <AvatarFallback>W</AvatarFallback>
+            <AvatarFallback>{cardTitle[0].toUpperCase()}</AvatarFallback>
           </Avatar>
           <div>
             <h3 className="text-base font-bold sm:text-lg">{cardTitle}</h3>

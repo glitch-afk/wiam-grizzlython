@@ -11,6 +11,10 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 
 import DrawersContainer from "@/components/drawer-views/container"
 
+import "../lib/api/events"
+import { useEffect } from "react"
+import { findEventsByProject } from "../lib/api/events"
+
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -23,6 +27,7 @@ const App: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+
   return (
     <>
       <style jsx global>{`

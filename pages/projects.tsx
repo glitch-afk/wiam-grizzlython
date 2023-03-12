@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
@@ -11,8 +11,15 @@ import SiteHeader from "@/components/site-header"
 import StatusCard from "@/components/status-card"
 import { Button } from "@/components/ui/button/button"
 import User from "@/components/user"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { findProjectByOwner } from "@/lib/api/projects"
 
 const ProjectsPage = () => {
+  const { isLoading, error, data: projects } = useQuery({
+    queryKey: ['repoData'],
+    queryFn: () => findProjectByOwner("0x00")
+  })
+
   return (
     <>
       <Head>
@@ -52,13 +59,14 @@ const ProjectsPage = () => {
           {/* project cards */}
           {projects?.length ? (
             <div className="mt-12 grid w-full grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-              {projects?.map(({ status, title, description, date }, idx) => (
+              {projects?.map(({ name, id }, idx) => (
                 <StatusCard
+                  cardId={id as string}
                   key={idx}
-                  status={status}
-                  cardTitle={title}
-                  listingDate={date}
-                  cardDescription={description}
+                  status={"SUCCESS"}
+                  cardTitle={name}
+                  listingDate={""}
+                  cardDescription={name}
                 />
               ))}
             </div>

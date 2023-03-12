@@ -22,29 +22,25 @@ import {
 } from "@/components/ui/collapsible"
 import Input from "@/components/ui/input"
 import Scrollbar from "@/components/ui/scrollbar"
+import { useRouter } from "next/router"
+import { Event, findEventsByProject } from "@/lib/api/events"
+import { useAtom } from "jotai"
+import { transactionAtom } from "@/components/drawer-views/context"
+import { getTokenPrice, getTransactionDetails } from "@/lib/api/price"
 
 const columnHelper = createColumnHelper<transactionTableData>()
 
 const columns = [
-  columnHelper.accessor("walletAddress", {
-    header: () => (
-      <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
-        Wallet Address
-        <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
-      </CollapsibleTrigger>
-    ),
-    cell: (info) => <span className="truncate">{info.getValue()}</span>,
-  }),
-  columnHelper.accessor("transactionId", {
+  columnHelper.accessor("data", {
     header: () => (
       <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
         Transaction Id
         <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
       </CollapsibleTrigger>
     ),
-    cell: (info) => <span className="truncate">{info.getValue()}</span>,
+    cell: (info) => <span className="truncate">{info.getValue()?.hash.substring(0, 18)}...</span>,
   }),
-  columnHelper.accessor("chain", {
+  columnHelper.accessor("blockchain", {
     header: () => (
       <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
         Chain
@@ -70,7 +66,7 @@ const columns = [
         <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
       </CollapsibleTrigger>
     ),
-    cell: (info) => <span>{info.getValue()} SOL</span>,
+    cell: (info) => <span>{info.getValue()} USD</span>,
   }),
   columnHelper.accessor("status", {
     header: () => (
@@ -101,6 +97,33 @@ const columns = [
       </div>
     ),
   }),
+  columnHelper.accessor("type", {
+    header: () => (
+      <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
+        Type
+        <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
+      </CollapsibleTrigger>
+    ),
+    cell: (info) => <span>{info.getValue()}</span>,
+  }),
+  columnHelper.accessor("source", {
+    header: () => (
+      <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
+        Source
+        <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
+      </CollapsibleTrigger>
+    ),
+    cell: (info) => <span>{info.getValue()}</span>,
+  }),
+  columnHelper.accessor("description", {
+    header: () => (
+      <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
+        Description
+        <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
+      </CollapsibleTrigger>
+    ),
+    cell: (info) => <span>{info.getValue()}</span>,
+  }),
   columnHelper.accessor("details", {
     header: () => (
       <span className="w-fit whitespace-nowrap font-semibold">Details</span>
@@ -119,14 +142,57 @@ const columns = [
 ]
 
 const TransactionTable = () => {
+  const { query } = useRouter()
+
+  const [transactionEvents, setTransactionEvents] = useAtom(transactionAtom)
+  
   const { data: tableData, isLoading } = useQuery({
     queryKey: ["tableData"],
-    queryFn: () => fakeTransactionData(100),
+    queryFn: async () => {
+      console.log(query)
+      return findEventsByProject(query.id as string)
+        .then(async res => {
+          console.log(res)
+          const transactionEvents: any[] = []
+
+          res.map(x => {
+            console.log(x.name)
+            if (x.name === 'transaction_executed') transactionEvents.push(x)
+          })
+
+          for(let i = 0; i < transactionEvents.length; i++) {
+            const details = await getTransactionDetails(transactionEvents[i].data.hash)
+
+            transactionEvents[i].status = details.status
+            transactionEvents[i].type = details.type
+            transactionEvents[i].description = details.description
+            transactionEvents[i].source = details.source
+            transactionEvents[i].details = `https://solana.fm/tx/${transactionEvents[i].data.hash}`
+
+            const tokens = details.tokens
+
+            for(let j = 0; j < tokens.length; j++) {
+              const price = await getTokenPrice(tokens[j].token)
+              
+              transactionEvents[i].amount = price * tokens[j].amount
+            }
+          }
+
+          console.log(transactionEvents, "transaction")
+
+          setTransactionEvents(transactionEvents)
+
+          return res
+        })
+        .catch(e => {
+          console.log(e, 34)
+        })
+    },
     refetchOnWindowFocus: false,
   })
 
   const table = useReactTable({
-    data: tableData ?? [],
+    data: transactionEvents ?? [],
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),

@@ -45,7 +45,7 @@ const activities = [
   },
 ]
 
-const RecentActivityTable = () => {
+const RecentActivityTable = ({ activities }: { activities: any[] }) => {  
   return (
     <ScrollArea className="h-[300px]">
       <table className="divide-dark-300 text-dark-100 min-w-full divide-y bg-transparent">
@@ -55,14 +55,14 @@ const RecentActivityTable = () => {
               scope="col"
               className="py-3.5 pr-3 text-left text-sm font-semibold"
             >
-              Type
+              Name
             </th>
 
             <th
               scope="col"
               className="hidden px-3 py-3.5 text-left text-sm font-semibold sm:table-cell"
             >
-              Description
+              Time
             </th>
 
             <th scope="col" className="relative py-3.5 pl-3">
@@ -74,17 +74,17 @@ const RecentActivityTable = () => {
           {activities.map((activity, idx) => (
             <tr key={idx}>
               <td className="w-full max-w-0 py-4 pr-3 text-sm font-medium sm:w-auto sm:max-w-none">
-                <span className="text-white">{activity.type}</span>
+                <span className="text-white">{activity.name.toUpperCase()}</span>
                 <dl className="font-normal lg:hidden">
-                  <dt className="sr-only sm:hidden">Description</dt>
+                  <dt className="sr-only sm:hidden">Time</dt>
                   <dd className="mt-1 truncate sm:hidden">
-                    {activity.description}
+                    {activity.createdAt} as
                   </dd>
                 </dl>
               </td>
 
               <td className="hidden px-3 py-4 text-sm sm:table-cell">
-                {activity.description}
+                {new Date(activity.createdAt).toDateString()}
               </td>
 
               <td className="py-4 pl-3 pr-4 text-right text-sm font-medium">

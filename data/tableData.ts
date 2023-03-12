@@ -12,12 +12,14 @@ export type AddressData = {
 }
 
 export type transactionTableData = {
-  walletAddress: string
-  transactionId: string
-  chain: string
+  data: any
+  blockchain: string
   amount: number
   status: TRANSACTION_STATUS | string
-  details: string
+  details: string,
+  type: string,
+  source: string,
+  description: string
 }
 
 const range = (len: number) => {
@@ -55,9 +57,8 @@ export function fakeWalletAddressData(len: number) {
 
 const newTransactionData = (): transactionTableData => {
   return {
-    walletAddress: faker.name.firstName(),
-    transactionId: faker.name.lastName(),
-    chain: faker.helpers.shuffle(["Solana", "Ethereum"])[0]!,
+    hash: faker.name.lastName(),
+    blockchain: faker.helpers.shuffle(["Solana", "Ethereum"])[0]!,
     amount: faker.datatype.number(500),
     status: faker.helpers.shuffle(["PENDING", "FAILED", "SUCCESS"])[0]!,
     details: faker.helpers.shuffle([

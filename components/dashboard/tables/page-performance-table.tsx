@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 import { ScrollArea } from "@/components/ui/scroll-area"
 
@@ -25,7 +25,27 @@ const tableItems = [
   },
 ]
 
-const PagePerformanceTable = () => {
+const PagePerformanceTable = ({ pageViews }: { pageViews: any[] }) => {
+  const [page, setPage] = useState<any[]>([])
+
+  useEffect(() => {
+    let mapping: any = {}
+    
+    pageViews.map(x => {
+      if(mapping[x.data.url]) mapping[x.data.url].views += 1
+      else {
+        mapping[x.data.url] = {
+          ...x,
+          views: 1
+        }
+      }
+    })
+
+    setPage(Object.values(mapping))
+  }, [pageViews])
+
+  useEffect(() => console.log(page, "page"), [page])
+  
   return (
     <ScrollArea className="h-[300px]">
       <table className="divide-dark-300 text-dark-100 min-w-full divide-y bg-transparent">
@@ -41,20 +61,20 @@ const PagePerformanceTable = () => {
               scope="col"
               className="pl-3\ w-full py-3.5 pr-4 text-right text-sm font-semibold"
             >
-              Traffic&nbsp;Share
+              Page&nbsp;Views
             </th>
           </tr>
         </thead>
         <tbody className="divide-dark-400 divide-y">
-          {tableItems.map((item, idx) => (
+          {page.map((item, idx) => (
             <tr key={idx}>
               <td className="w-full max-w-0 py-4 pr-3 text-sm font-medium text-white sm:w-auto sm:max-w-none">
-                {item.name}
+                {item.data.url}
               </td>
 
               <td className="py-4 pl-3 pr-4 text-right text-sm font-medium">
                 <a href="#" className="text-[#9747FF]">
-                  {item.trafficShare}
+                  {item.views}
                 </a>
               </td>
             </tr>
