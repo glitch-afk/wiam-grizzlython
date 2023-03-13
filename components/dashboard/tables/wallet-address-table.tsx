@@ -115,15 +115,13 @@ const WalletAddressTable = () => {
   const { data: tableData, isLoading } = useQuery({
     queryKey: ["tableData"],
     queryFn: async () => {
-      console.log(query)
-      return findIamByProject(query.id as string).then((x) =>
+      const id = window.location.pathname.split("/")[3]
+      return findIamByProject(id ?? query.id as string).then((x) =>
         x.map((y) => ({ ...y }))
       )
     },
     refetchOnWindowFocus: true,
   })
-
-  useEffect(() => console.log(tableData, "789"), [tableData])
 
   const table = useReactTable<
     IamUser & { transactionVolume: number; transactionExecuted: number }

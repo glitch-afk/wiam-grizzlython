@@ -44,8 +44,6 @@ const PagePerformanceTable = ({ pageViews }: { pageViews: any[] }) => {
     setPage(Object.values(mapping))
   }, [pageViews])
 
-  useEffect(() => console.log(page, "page"), [page])
-
   return (
     <ScrollArea className="h-[300px]">
       <table className="divide-dark-300 text-dark-100 min-w-full divide-y bg-transparent">

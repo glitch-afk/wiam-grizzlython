@@ -75,6 +75,13 @@ export const siteConfig: SiteConfig = {
       icon: Icons.transaction,
     },
     {
+      title: "API Keys",
+      href: "/dashboard/api-key",
+      disabled: false,
+      external: false,
+      icon: Icons.webhook,
+    },
+    {
       title: "Email",
       href: "#",
       disabled: true,

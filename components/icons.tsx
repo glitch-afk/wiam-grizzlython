@@ -20,6 +20,7 @@ import {
   Twitter,
   Wallet,
   X,
+  Webhook,
   type Icon as LucideIcon,
   type LucideProps,
 } from "lucide-react"
@@ -48,6 +49,7 @@ export const Icons = {
   upDown: ChevronsUpDown,
   reload: RefreshCcw,
   slash: Slash,
+  webhook: Webhook,
   logo: (props: LucideProps) => (
     <svg
       xmlns="http://www.w3.org/2000/svg"

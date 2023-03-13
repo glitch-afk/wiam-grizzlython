@@ -20,7 +20,7 @@ const ProjectsPage = () => {
     data: projects,
   } = useQuery({
     queryKey: ["repoData"],
-    queryFn: () => findProjectByOwner("0x00"),
+    queryFn: () => findProjectByOwner(),
   })
 
   return (

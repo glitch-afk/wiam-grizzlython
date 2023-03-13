@@ -45,15 +45,14 @@ const Dashboard = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ["data"],
     queryFn: async () => {
-      return findEventsByProject(query.id as string)
+      const id = window.location.pathname.split("/")[2]
+      return findEventsByProject(id ?? query.id as string)
         .then((res) => {
-          console.log(res)
           const walletConnectedEvents: WalletConnectedEvent[] = []
           const pageViewedEvents: PageViewedEvent[] = []
           const transactionEvents: Event<any>[] = []
 
           res.map((x) => {
-            console.log(x.name)
             if (x.name === "wallet_connected")
               walletConnectedEvents.push(x as WalletConnectedEvent)
             else if (x.name === "page_viewed")
@@ -68,15 +67,11 @@ const Dashboard = () => {
           return res
         })
         .catch((e) => {
-          console.log(e, 34)
+          console.error(e)
         })
     },
     refetchOnWindowFocus: true,
   })
-
-  useEffect(() => {
-    console.log("GOT DATA => ", data, isLoading, error)
-  }, [isLoading, error, data])
 
   useEffect(() => {
     if (!isLoading && !error && walletConnectedEvents.length > 0) {
@@ -106,7 +101,6 @@ const Dashboard = () => {
       )
 
       setOverviewData((x) => {
-        console.log("here")
         let shallowCopy = [...x]
 
         let today = new Date()
@@ -115,7 +109,6 @@ const Dashboard = () => {
         const currentRetentionTime = answer[today.toDateString()].number
         today.setDate(today.getDate() - 7)
         const previousRetentionTime = answer[today.toDateString()].number
-        console.log(previousRetentionTime, today)
 
         shallowCopy[1].dataDisplay = `${currentRetentionTime.toFixed(2)} Users`
         if (currentRetentionTime <= 0) shallowCopy[1].percentChange = -100
@@ -132,15 +125,8 @@ const Dashboard = () => {
     }
   }, [walletConnectedEvents, pageViewedEvents, isLoading])
 
-  useEffect(
-    () => console.log(walletConnectedEvents, "satyam"),
-    [walletConnectedEvents]
-  )
-
   useEffect(() => {
     const retention = generateRetentionTime(walletConnectedEvents)
-
-    console.log(overviewData)
 
     setOverviewData((x) => {
       let shallowCopy = [...x]
@@ -151,7 +137,6 @@ const Dashboard = () => {
       const currentRetentionTime = retention[today.toDateString()].number
       today.setDate(today.getDate() - 7)
       const previousRetentionTime = retention[today.toDateString()].number
-      console.log(previousRetentionTime, today)
 
       shallowCopy[2].dataDisplay = `${currentRetentionTime.toFixed(2)} Sec`
       if (currentRetentionTime <= 0) shallowCopy[2].percentChange = -100

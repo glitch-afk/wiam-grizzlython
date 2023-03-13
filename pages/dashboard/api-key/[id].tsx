@@ -3,11 +3,23 @@ import Head from "next/head"
 
 import DashboardLayout from "@/components/dashboard/_layout"
 import { Icons } from "@/components/icons"
+import { findProjectById } from "@/lib/api/projects"
+import { useRouter } from "next/router"
+import { useQuery } from "@tanstack/react-query"
 
 const APIKey = () => {
-  const [apiKey, setApiKey] = useState(
-    "08y389fh394g872378h23487gh83u24ng8u34nun"
-  )
+  const [apiKey, setApiKey] = useState("")
+
+  const { query } = useRouter()
+
+  const { data: tableData, isLoading } = useQuery({
+    queryKey: ["tableData"],
+    queryFn: async () => {
+      return findProjectById(query.id as string).then(x => setApiKey(x[0].key as string))
+    },
+    refetchOnWindowFocus: false,
+  })
+
   const [isCopied, setIsCopied] = useState(false)
 
   useEffect(() => {
@@ -17,7 +29,7 @@ const APIKey = () => {
         clearTimeout(timeout)
       }
     }
-  })
+  }, [isCopied])
 
   return (
     <>

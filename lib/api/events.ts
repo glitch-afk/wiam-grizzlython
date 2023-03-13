@@ -46,10 +46,8 @@ export const findEventsByProject = async (
       method: "GET",
     })
 
-    console.log(data.data, "1234", projectId)
     return data.data
   } catch (e: any) {
-    console.log(e.response.data, "1234", projectId)
     throw new Error(e.response.data)
   }
 }
@@ -58,7 +56,6 @@ export const findIamByProject = async (
   projectId: string
 ): Promise<IamUser[]> => {
   try {
-    console.log(projectId, "12345")
     const data = await request({
       url: "/iam",
       data: {
@@ -112,7 +109,6 @@ export const convertWalletConnectedGraph = (events: WalletConnectedEvent[]) => {
       )
         continue
 
-      console.log(thisWeek.toDateString(), events[i].data.startTime)
       weeklyData[thisWeek.toDateString()] = {
         ...weeklyData[thisWeek.toDateString()],
         number: weeklyData[thisWeek.toDateString()].number + 1,
@@ -124,7 +120,6 @@ export const convertWalletConnectedGraph = (events: WalletConnectedEvent[]) => {
       }
     }
 
-    console.log(weeklyData, "weeklydata")
     return weeklyData
   } catch (e: any) {
     throw e
@@ -225,7 +220,6 @@ export const generateRetentionTime = (
       let endTime = new Date()
       if ("endTime" in events[i].data)
         endTime = new Date(events[i].data.endTime)
-      console.log(endTime, "satyam")
 
       const retentionTime =
         (endTime.getTime() - new Date(events[i].data.startTime).getTime()) /
@@ -243,8 +237,6 @@ export const generateRetentionTime = (
         (weeklyData[thisWeek.toDateString()].number + retentionTime) /
         weeklyData[thisWeek.toDateString()].retention.length
     }
-
-    console.log(weeklyData)
 
     return weeklyData
   } catch (e: any) {
@@ -287,8 +279,6 @@ export const generatePageViewsGraph = (
       weeklyData[thisWeek.toDateString()].number =
         weeklyData[thisWeek.toDateString()].number + 1
     }
-
-    console.log(weeklyData)
 
     return weeklyData
   } catch (e: any) {

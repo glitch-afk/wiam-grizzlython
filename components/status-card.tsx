@@ -23,7 +23,7 @@ const StatusCard = ({
 }: IStatusCardProps) => {
   return (
     <Link
-      href={`/dashboard?id=${cardId}`}
+      href={`/dashboard/${cardId}`}
       className="bg-dark-700/50 hover:bg-dark-700 hover:border-dark-400 border-dark-400 shadow-card col-span-1 rounded-md border p-6"
     >
       <div className="flex items-center justify-between">

@@ -153,14 +153,12 @@ const TransactionTable = () => {
   const { data: tableData, isLoading } = useQuery({
     queryKey: ["tableData"],
     queryFn: async () => {
-      console.log(query)
-      return findEventsByProject(query.id as string)
+      const id = window.location.pathname.split("/")[3]
+      return findEventsByProject(id ?? query.id as string)
         .then(async (res) => {
-          console.log(res)
           const transactionEvents: any[] = []
 
           res.map((x) => {
-            console.log(x.name)
             if (x.name === "transaction_executed") transactionEvents.push(x)
           })
 
@@ -186,14 +184,12 @@ const TransactionTable = () => {
             }
           }
 
-          console.log(transactionEvents, "transaction")
-
           setTransactionEvents(transactionEvents)
 
           return res
         })
         .catch((e) => {
-          console.log(e, 34)
+          console.error(e)
         })
     },
     refetchOnWindowFocus: false,
