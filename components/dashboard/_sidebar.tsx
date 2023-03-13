@@ -45,11 +45,17 @@ const Sidebar = ({ className }: { className?: string }) => {
               "text-dark-100 flex items-center rounded-md p-4 transition-all duration-300 hover:text-white",
               item.href === pathname
                 ? "bg-dark-500 font-semibold text-white"
-                : "hover:bg-dark-500"
+                : "hover:bg-dark-500",
+              item.disabled && "cursor-not-allowed"
             )}
           >
             <item.icon className="mr-3 h-6 w-6" />
             <span className="text-lg">{item.title}</span>
+            {item.disabled ? (
+              <span className="bg-dark-400 ml-2 rounded-full px-2 py-1 text-xs text-green-400">
+                Coming Soon
+              </span>
+            ) : null}
           </Link>
         ))}
       </nav>
