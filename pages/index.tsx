@@ -30,7 +30,7 @@ const Home: NextPage = () => {
           <div className="hidden w-full items-center justify-end space-x-4 lg:flex">
             <Link href={siteRoutes.auth}>
               <Button shape="pill" className="text-semibold" variant={"subtle"}>
-                Connect Wallet
+                Log In
               </Button>
             </Link>
           </div>

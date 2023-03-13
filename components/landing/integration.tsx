@@ -61,10 +61,11 @@ const IntegrationSection = () => {
               </Button>
             </div>
           </div>
-          <Image
-            src="/assets/hero.png"
+          {/*  eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/assets/Integration-main.png"
             alt="App screenshot"
-            className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
+            className="bg-dark-700 w-[48rem] rounded-xl sm:w-[57rem] md:-ml-4 lg:-ml-0"
             width={2432}
             height={1442}
           />

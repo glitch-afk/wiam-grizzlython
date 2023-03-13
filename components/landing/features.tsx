@@ -1,5 +1,7 @@
 import React from "react"
 
+import { Resources } from "@/components/Card"
+
 const FeaturesSection = () => {
   return (
     <div className="max-w-8xl mx-auto w-full pt-24 lg:pt-40">
@@ -19,26 +21,7 @@ const FeaturesSection = () => {
         </p>
       </div>
       {/* cards grid */}
-      <div className="mt-20 grid w-full grid-cols-12 gap-4">
-        {/* row 1 */}
-        <div className="border-dark-400 bg-dark-600/50 hover:border-dark-300 col-span-full h-[438px] rounded-2xl border p-3 transition-colors duration-300 hover:opacity-100 xl:col-span-7">
-          CARD #1
-        </div>
-        <div className="border-dark-400 bg-dark-600/50 hover:border-dark-300 col-span-full h-[438px] rounded-2xl border p-3 transition-colors duration-300 hover:opacity-100 xl:col-span-5">
-          CARD #2
-        </div>
-        {/* row 2 */}
-        <div className="border-dark-400 bg-dark-600/50 hover:border-dark-300 col-span-full h-[438px] rounded-2xl border p-3 transition-colors duration-300 hover:opacity-100">
-          CARD #3
-        </div>
-        {/* row 3 */}
-        <div className="border-dark-400 bg-dark-600/50 hover:border-dark-300 col-span-full h-[438px] rounded-2xl border p-3 transition-colors duration-300 hover:opacity-100 xl:col-span-5">
-          CARD #4
-        </div>
-        <div className="border-dark-400 bg-dark-600/50 hover:border-dark-300 col-span-full h-[438px] rounded-2xl border p-3 transition-colors duration-300 hover:opacity-100 xl:col-span-7">
-          CARD #5
-        </div>
-      </div>
+      <Resources />
     </div>
   )
 }
