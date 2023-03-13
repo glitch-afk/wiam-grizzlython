@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
 import { projects } from "@/data"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 import { siteConfig } from "@/config/site"
+import { findProjectByOwner } from "@/lib/api/projects"
 import { Icons } from "@/components/icons"
 import MainNav from "@/components/main-nav"
 import SiteHeader from "@/components/site-header"
@@ -13,6 +15,15 @@ import { Button } from "@/components/ui/button/button"
 import User from "@/components/user"
 
 const ProjectsPage = () => {
+  const {
+    isLoading,
+    error,
+    data: projects,
+  } = useQuery({
+    queryKey: ["repoData"],
+    queryFn: () => findProjectByOwner("0x00"),
+  })
+
   return (
     <>
       <Head>
@@ -52,13 +63,14 @@ const ProjectsPage = () => {
           {/* project cards */}
           {projects?.length ? (
             <div className="mt-12 grid w-full grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-              {projects?.map(({ status, title, description, date }, idx) => (
+              {projects?.map(({ name, id }, idx) => (
                 <StatusCard
+                  cardId={id as string}
                   key={idx}
-                  status={status}
-                  cardTitle={title}
-                  listingDate={date}
-                  cardDescription={description}
+                  status={"SUCCESS"}
+                  cardTitle={name}
+                  listingDate={""}
+                  cardDescription={name}
                 />
               ))}
             </div>
@@ -68,6 +80,7 @@ const ProjectsPage = () => {
                 src={"/assets/404-dark.svg"}
                 alt="not_found"
                 width={200}
+                priority
                 height={160}
               />
               <span className="text-dark-200 mt-8 text-xl font-semibold">

@@ -1,5 +1,6 @@
-import React from "react"
-import { AddressData, fakeWalletAddressData } from "@/data/tableData"
+import React, { useEffect } from "react"
+import Link from "next/link"
+import { useRouter } from "next/router"
 import { useQuery } from "@tanstack/react-query"
 import {
   Column,
@@ -12,6 +13,11 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 
+import {
+  IamUser,
+  WalletConnectedEvent,
+  findIamByProject,
+} from "@/lib/api/events"
 import { Icons } from "@/components/icons"
 import { Button } from "@/components/ui/button/button"
 import {
@@ -22,10 +28,10 @@ import {
 import Input from "@/components/ui/input"
 import Scrollbar from "@/components/ui/scrollbar"
 
-const columnHelper = createColumnHelper<AddressData>()
+const columnHelper = createColumnHelper<IamUser>()
 
 const columns = [
-  columnHelper.accessor("walletAddress", {
+  columnHelper.accessor("address", {
     header: () => (
       <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
         Wallet Address
@@ -34,7 +40,7 @@ const columns = [
     ),
     cell: (info) => <span className="truncate">{info.getValue()}</span>,
   }),
-  columnHelper.accessor("chain", {
+  columnHelper.accessor("blockchains", {
     header: () => (
       <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
         Chain
@@ -43,7 +49,9 @@ const columns = [
     ),
     cell: (info) => (
       <div className="flex items-center">
-        {info.getValue().toLowerCase() === "solana" ? (
+        {info.getValue() &&
+        info.getValue().length > 0 &&
+        info.getValue()[0].toLowerCase() === "solana" ? (
           <Icons.solana className="mr-2 inline h-6 w-6" />
         ) : (
           <Icons.ethereum className="mr-2 inline h-auto w-4" />
@@ -53,14 +61,18 @@ const columns = [
       </div>
     ),
   }),
-  columnHelper.accessor("sessions", {
+  columnHelper.accessor("project", {
     header: () => (
       <CollapsibleTrigger className="w-fit whitespace-nowrap font-semibold">
-        Total Sessions
+        Project
         <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
       </CollapsibleTrigger>
     ),
-    cell: (info) => <span>{info.getValue()} sessions</span>,
+    cell: (info) => (
+      <Link href={`/dashboard?id=${info.getValue()?.name}`}>
+        {info.getValue()?.name}
+      </Link>
+    ),
   }),
   columnHelper.accessor("transactionVolume", {
     header: () => (
@@ -80,39 +92,48 @@ const columns = [
     ),
     cell: (info) => <span>{info.getValue()} tx</span>,
   }),
-  columnHelper.accessor("details", {
-    header: () => (
-      <span className="w-fit whitespace-nowrap font-semibold">Details</span>
-    ),
-    cell: (info) => (
-      <a
-        href={info.getValue()}
-        target="_blank"
-        className="hover:text-brand-purple whitespace-nowrap text-xs underline underline-offset-2 md:text-sm"
-        rel="noreferrer"
-      >
-        View Details
-      </a>
-    ),
-  }),
+  // columnHelper.accessor("details", {
+  //   header: () => (
+  //     <span className="w-fit whitespace-nowrap font-semibold">Details</span>
+  //   ),
+  //   cell: (info) => (
+  //     <a
+  //       href={info.getValue()}
+  //       target="_blank"
+  //       className="hover:text-brand-purple whitespace-nowrap text-xs underline underline-offset-2 md:text-sm"
+  //       rel="noreferrer"
+  //     >
+  //       View Details
+  //     </a>
+  //   ),
+  // }),
 ]
 
 const WalletAddressTable = () => {
+  const { query } = useRouter()
+
   const { data: tableData, isLoading } = useQuery({
     queryKey: ["tableData"],
-    queryFn: () => fakeWalletAddressData(100),
-    refetchOnWindowFocus: false,
+    queryFn: async () => {
+      console.log(query)
+      return findIamByProject(query.id as string).then((x) =>
+        x.map((y) => ({ ...y }))
+      )
+    },
+    refetchOnWindowFocus: true,
   })
 
-  const table = useReactTable({
+  useEffect(() => console.log(tableData, "789"), [tableData])
+
+  const table = useReactTable<
+    IamUser & { transactionVolume: number; transactionExecuted: number }
+  >({
     data: tableData ?? [],
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   })
-
-  if (isLoading) return <>Loading ...</>
 
   return (
     <div className="border-dark-400 rounded-lg border">

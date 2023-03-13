@@ -1,6 +1,7 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useRouter } from "next/router"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
@@ -12,6 +13,9 @@ import Logo from "../site-logo"
 const Sidebar = ({ className }: { className?: string }) => {
   const pathname = usePathname()
   const { closeDrawer } = useDrawer()
+
+  const { query } = useRouter()
+
   return (
     <aside
       className={cn(
@@ -36,7 +40,7 @@ const Sidebar = ({ className }: { className?: string }) => {
         {siteConfig.dashboardSideNav.map((item, idx) => (
           <Link
             key={idx}
-            href={item.disabled ? "#" : (item.href as string)}
+            href={item.disabled ? "#" : `${item.href as string}/${query.id}`}
             className={cn(
               "text-dark-100 flex items-center rounded-md p-4 transition-all duration-300 hover:text-white",
               item.href === pathname
