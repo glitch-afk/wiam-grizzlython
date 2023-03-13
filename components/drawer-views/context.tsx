@@ -1,6 +1,7 @@
+import { atom, createStore, useAtom } from "jotai"
+
 import { PageViewedEvent, WalletConnectedEvent } from "@/lib/api/events"
 import { Project } from "@/lib/api/projects"
-import { atom, createStore, useAtom } from "jotai"
 
 export type DRAWER_VIEW =
   | "DASHBOARD_SIDEBAR"

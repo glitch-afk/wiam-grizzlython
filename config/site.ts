@@ -20,6 +20,7 @@ export const siteRoutes = {
   home: "/projects",
   login: "/login",
   register: "/register",
+  auth: "/auth",
 }
 
 export const siteConfig: SiteConfig = {

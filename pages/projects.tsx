@@ -3,21 +3,25 @@ import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
 import { projects } from "@/data"
+import { useQuery, useQueryClient } from "@tanstack/react-query"
 
 import { siteConfig } from "@/config/site"
+import { findProjectByOwner } from "@/lib/api/projects"
 import { Icons } from "@/components/icons"
 import MainNav from "@/components/main-nav"
 import SiteHeader from "@/components/site-header"
 import StatusCard from "@/components/status-card"
 import { Button } from "@/components/ui/button/button"
 import User from "@/components/user"
-import { useQuery, useQueryClient } from "@tanstack/react-query"
-import { findProjectByOwner } from "@/lib/api/projects"
 
 const ProjectsPage = () => {
-  const { isLoading, error, data: projects } = useQuery({
-    queryKey: ['repoData'],
-    queryFn: () => findProjectByOwner("0x00")
+  const {
+    isLoading,
+    error,
+    data: projects,
+  } = useQuery({
+    queryKey: ["repoData"],
+    queryFn: () => findProjectByOwner("0x00"),
   })
 
   return (
@@ -76,6 +80,7 @@ const ProjectsPage = () => {
                 src={"/assets/404-dark.svg"}
                 alt="not_found"
                 width={200}
+                priority
                 height={160}
               />
               <span className="text-dark-200 mt-8 text-xl font-semibold">

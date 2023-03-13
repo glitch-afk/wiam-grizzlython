@@ -45,7 +45,7 @@ const activities = [
   },
 ]
 
-const RecentActivityTable = ({ activities }: { activities: any[] }) => {  
+const RecentActivityTable = ({ activities }: { activities: any[] }) => {
   return (
     <ScrollArea className="h-[300px]">
       <table className="divide-dark-300 text-dark-100 min-w-full divide-y bg-transparent">
@@ -74,7 +74,9 @@ const RecentActivityTable = ({ activities }: { activities: any[] }) => {
           {activities.map((activity, idx) => (
             <tr key={idx}>
               <td className="w-full max-w-0 py-4 pr-3 text-sm font-medium sm:w-auto sm:max-w-none">
-                <span className="text-white">{activity.name.toUpperCase()}</span>
+                <span className="text-white">
+                  {activity.name.toUpperCase()}
+                </span>
                 <dl className="font-normal lg:hidden">
                   <dt className="sr-only sm:hidden">Time</dt>
                   <dd className="mt-1 truncate sm:hidden">

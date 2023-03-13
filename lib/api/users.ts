@@ -1,3 +1,1 @@
-export const generateAuthTokens = async (userId: string) => {
-    
-}
+export const generateAuthTokens = async (userId: string) => {}

@@ -1,5 +1,6 @@
 import React from "react"
-import { fakeTransactionData, transactionTableData } from "@/data/tableData"
+import { useRouter } from "next/router"
+import { transactionTableData } from "@/data/tableData"
 import { useQuery } from "@tanstack/react-query"
 import {
   Column,
@@ -11,8 +12,12 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table"
+import { useAtom } from "jotai"
 
+import { Event, findEventsByProject } from "@/lib/api/events"
+import { getTokenPrice, getTransactionDetails } from "@/lib/api/price"
 import { cn } from "@/lib/utils"
+import { transactionAtom } from "@/components/drawer-views/context"
 import { Icons } from "@/components/icons"
 import { Button } from "@/components/ui/button/button"
 import {
@@ -22,11 +27,6 @@ import {
 } from "@/components/ui/collapsible"
 import Input from "@/components/ui/input"
 import Scrollbar from "@/components/ui/scrollbar"
-import { useRouter } from "next/router"
-import { Event, findEventsByProject } from "@/lib/api/events"
-import { useAtom } from "jotai"
-import { transactionAtom } from "@/components/drawer-views/context"
-import { getTokenPrice, getTransactionDetails } from "@/lib/api/price"
 
 const columnHelper = createColumnHelper<transactionTableData>()
 
@@ -38,7 +38,11 @@ const columns = [
         <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
       </CollapsibleTrigger>
     ),
-    cell: (info) => <span className="truncate">{info.getValue()?.hash.substring(0, 18)}...</span>,
+    cell: (info) => (
+      <span className="truncate">
+        {info.getValue()?.hash.substring(0, 18)}...
+      </span>
+    ),
   }),
   columnHelper.accessor("blockchain", {
     header: () => (
@@ -145,35 +149,39 @@ const TransactionTable = () => {
   const { query } = useRouter()
 
   const [transactionEvents, setTransactionEvents] = useAtom(transactionAtom)
-  
+
   const { data: tableData, isLoading } = useQuery({
     queryKey: ["tableData"],
     queryFn: async () => {
       console.log(query)
       return findEventsByProject(query.id as string)
-        .then(async res => {
+        .then(async (res) => {
           console.log(res)
           const transactionEvents: any[] = []
 
-          res.map(x => {
+          res.map((x) => {
             console.log(x.name)
-            if (x.name === 'transaction_executed') transactionEvents.push(x)
+            if (x.name === "transaction_executed") transactionEvents.push(x)
           })
 
-          for(let i = 0; i < transactionEvents.length; i++) {
-            const details = await getTransactionDetails(transactionEvents[i].data.hash)
+          for (let i = 0; i < transactionEvents.length; i++) {
+            const details = await getTransactionDetails(
+              transactionEvents[i].data.hash
+            )
 
             transactionEvents[i].status = details.status
             transactionEvents[i].type = details.type
             transactionEvents[i].description = details.description
             transactionEvents[i].source = details.source
-            transactionEvents[i].details = `https://solana.fm/tx/${transactionEvents[i].data.hash}`
+            transactionEvents[
+              i
+            ].details = `https://solana.fm/tx/${transactionEvents[i].data.hash}`
 
             const tokens = details.tokens
 
-            for(let j = 0; j < tokens.length; j++) {
+            for (let j = 0; j < tokens.length; j++) {
               const price = await getTokenPrice(tokens[j].token)
-              
+
               transactionEvents[i].amount = price * tokens[j].amount
             }
           }
@@ -184,7 +192,7 @@ const TransactionTable = () => {
 
           return res
         })
-        .catch(e => {
+        .catch((e) => {
           console.log(e, 34)
         })
     },

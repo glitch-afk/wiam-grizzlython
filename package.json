@@ -14,7 +14,6 @@
     "format:check": "prettier --check \"**/*.{ts,tsx}\" --cache"
   },
   "dependencies": {
-    "@faker-js/faker": "^7.6.0",
     "@headlessui/react": "^1.7.12",
     "@hookform/resolvers": "^2.9.11",
     "@next-auth/prisma-adapter": "^1.0.5",

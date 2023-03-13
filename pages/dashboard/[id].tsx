@@ -1,17 +1,34 @@
 import React, { useEffect, useState } from "react"
 import Head from "next/head"
+import { useRouter } from "next/router"
 import { OverViewCardsData } from "@/data"
 import {
   monthlyComparison,
   weeklyComparison,
   yearlyComparison,
 } from "@/data/index"
+import { useQuery } from "@tanstack/react-query"
+import { useAtom } from "jotai"
 
+import {
+  Event,
+  PageViewedEvent,
+  WalletConnectedEvent,
+  convertWalletConnectedGraph,
+  findEventsByProject,
+  generateRetentionTime,
+} from "@/lib/api/events"
 import OverviewChart from "@/components/charts/overview"
 import TransactionChart from "@/components/charts/transation"
 import DashboardLayout from "@/components/dashboard/_layout"
 import PagePerformanceTable from "@/components/dashboard/tables/page-performance-table"
 import RecentActivityTable from "@/components/dashboard/tables/recent-activity"
+import {
+  pageViewedAtom,
+  usePageViewedEvents,
+  useWalletConnectedEvents,
+  walletConnectedAtom,
+} from "@/components/drawer-views/context"
 import {
   Select,
   SelectContent,
@@ -19,11 +36,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { convertWalletConnectedGraph, Event, findEventsByProject, generateRetentionTime, PageViewedEvent, WalletConnectedEvent } from "@/lib/api/events"
-import { useRouter } from "next/router"
-import { useQuery } from "@tanstack/react-query"
-import { pageViewedAtom, usePageViewedEvents, useWalletConnectedEvents, walletConnectedAtom } from "@/components/drawer-views/context"
-import { useAtom } from "jotai"
 
 export const strokeColors = ["#9747FF", "#F92672", "#4DA765", "#FF8947"]
 
@@ -35,25 +47,28 @@ const Dashboard = () => {
 
   const [projectId, setProjectId] = useState(query.id)
 
-  const [walletConnectedEvents, setWalletConnectedEvents] = useAtom(walletConnectedAtom)
+  const [walletConnectedEvents, setWalletConnectedEvents] =
+    useAtom(walletConnectedAtom)
   const [pageViewedEvents, setPageViewedEvents] = useAtom(pageViewedAtom)
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["data"],
     queryFn: async () => {
-
       return findEventsByProject(query.id as string)
-        .then(res => {
+        .then((res) => {
           console.log(res)
           const walletConnectedEvents: WalletConnectedEvent[] = []
           const pageViewedEvents: PageViewedEvent[] = []
           const transactionEvents: Event<any>[] = []
 
-          res.map(x => {
+          res.map((x) => {
             console.log(x.name)
-            if (x.name === 'wallet_connected') walletConnectedEvents.push(x as WalletConnectedEvent)
-            else if (x.name === 'page_viewed') pageViewedEvents.push(x as PageViewedEvent)
-            else if (x.name === 'transaction_executed') transactionEvents.push(x)
+            if (x.name === "wallet_connected")
+              walletConnectedEvents.push(x as WalletConnectedEvent)
+            else if (x.name === "page_viewed")
+              pageViewedEvents.push(x as PageViewedEvent)
+            else if (x.name === "transaction_executed")
+              transactionEvents.push(x)
           })
 
           setWalletConnectedEvents(walletConnectedEvents)
@@ -61,7 +76,7 @@ const Dashboard = () => {
 
           return res
         })
-        .catch(e => {
+        .catch((e) => {
           console.log(e, 34)
         })
     },
@@ -74,19 +89,37 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!isLoading && !error && walletConnectedEvents.length > 0) {
+      const answer = convertWalletConnectedGraph(
+        walletConnectedEvents.map((x) => ({
+          ...x,
+          data: {
+            startTime: new Date(x.data.startTime),
+            address: x.data.address,
+            endTime: new Date(x.data.endTime) ? x.data.endTime : new Date(),
+          },
+        }))
+      )
 
-      const answer = convertWalletConnectedGraph(walletConnectedEvents.map(x => ({ ...x, data: { startTime: new Date(x.data.startTime), address: x.data.address, endTime: new Date(x.data.endTime) ? x.data.endTime : new Date() } })))
+      setTransactionChartData(
+        Object.values(answer)
+          .reverse()
+          .map((x) => ({
+            date: new Date(x.startDate).getTime(),
+            views: x.number,
+            btc: 0,
+            diff: 0,
+            name: new Date(x.startDate).toDateString(),
+            eth: x.number,
+            percentage: (x.number % 100).toString(),
+          }))
+      )
 
-      setTransactionChartData(Object.values(answer).reverse().map(x => ({
-        date: new Date(x.startDate).getTime(), views: x.number, btc: 0, diff: 0, name: new Date(x.startDate).toDateString(), eth: x.number, percentage: (x.number % 100).toString()
-      })))
-
-      setOverviewData(x => {
+      setOverviewData((x) => {
         console.log("here")
         let shallowCopy = [...x]
 
         let today = new Date()
-        today.setDate(today.getDate() - (today.getDay() + 6) % 7)
+        today.setDate(today.getDate() - ((today.getDay() + 6) % 7))
 
         const currentRetentionTime = answer[today.toDateString()].number
         today.setDate(today.getDate() - 7)
@@ -96,7 +129,10 @@ const Dashboard = () => {
         shallowCopy[1].dataDisplay = `${currentRetentionTime.toFixed(2)} Users`
         if (currentRetentionTime <= 0) shallowCopy[1].percentChange = -100
         else if (previousRetentionTime <= 0) shallowCopy[1].percentChange = 100
-        else shallowCopy[1].percentChange = Number(((currentRetentionTime / previousRetentionTime) * 100).toFixed(2))
+        else
+          shallowCopy[1].percentChange = Number(
+            ((currentRetentionTime / previousRetentionTime) * 100).toFixed(2)
+          )
 
         shallowCopy[0].dataDisplay = `${pageViewedEvents.length} Views`
 
@@ -105,7 +141,10 @@ const Dashboard = () => {
     }
   }, [walletConnectedEvents, pageViewedEvents, isLoading])
 
-  useEffect(() => console.log(walletConnectedEvents, "satyam"), [walletConnectedEvents])
+  useEffect(
+    () => console.log(walletConnectedEvents, "satyam"),
+    [walletConnectedEvents]
+  )
 
   useEffect(() => {
     const retention = generateRetentionTime(walletConnectedEvents)
@@ -116,7 +155,7 @@ const Dashboard = () => {
       let shallowCopy = [...x]
 
       let today = new Date()
-      today.setDate(today.getDate() - (today.getDay() + 6) % 7)
+      today.setDate(today.getDate() - ((today.getDay() + 6) % 7))
 
       const currentRetentionTime = retention[today.toDateString()].number
       today.setDate(today.getDate() - 7)
@@ -126,9 +165,12 @@ const Dashboard = () => {
       shallowCopy[2].dataDisplay = `${currentRetentionTime.toFixed(2)} Sec`
       if (currentRetentionTime <= 0) shallowCopy[2].percentChange = -100
       else if (previousRetentionTime <= 0) shallowCopy[2].percentChange = 100
-      else shallowCopy[2].percentChange = Number(((currentRetentionTime / previousRetentionTime) * 100).toFixed(2))
+      else
+        shallowCopy[2].percentChange = Number(
+          ((currentRetentionTime / previousRetentionTime) * 100).toFixed(2)
+        )
 
-      return x      
+      return x
     })
   }, [walletConnectedEvents])
 
@@ -160,23 +202,21 @@ const Dashboard = () => {
         <div className="bg-dark-600 border-dark-400 w-full rounded-lg border p-4">
           {/* overview cards */}
           <div className="3xl:grid-cols-4 grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-            {overviewData.map(
-              ({ title, dataDisplay, percentChange }, idx) => (
-                <div
-                  className="border-dark-400 shadow-card hover:bg-dark-500 rounded-md border p-4"
-                  key={idx}
-                >
-                  <span className="text-dark-50 text-sm font-semibold">
-                    {title}
-                  </span>
-                  <OverviewChart
-                    strokeColor={strokeColors[idx]}
-                    percentChange={percentChange}
-                    dataDisplay={dataDisplay}
-                  />
-                </div>
-              )
-            )}
+            {overviewData.map(({ title, dataDisplay, percentChange }, idx) => (
+              <div
+                className="border-dark-400 shadow-card hover:bg-dark-500 rounded-md border p-4"
+                key={idx}
+              >
+                <span className="text-dark-50 text-sm font-semibold">
+                  {title}
+                </span>
+                <OverviewChart
+                  strokeColor={strokeColors[idx]}
+                  percentChange={percentChange}
+                  dataDisplay={dataDisplay}
+                />
+              </div>
+            ))}
           </div>
           {/* volume chart */}
           <div>

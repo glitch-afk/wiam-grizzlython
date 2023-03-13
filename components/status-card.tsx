@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 export type STATUS_TYPE = "SUCCESS" | "FAILED" | "DEFAULT"
 
 interface IStatusCardProps {
-  cardId: string,
+  cardId: string
   cardTitle: string
   cardDescription?: string
   listingDate?: string

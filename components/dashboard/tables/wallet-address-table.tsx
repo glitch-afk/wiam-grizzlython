@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react"
-import { AddressData, fakeWalletAddressData } from "@/data/tableData"
+import React, { useEffect } from "react"
+import Link from "next/link"
+import { useRouter } from "next/router"
 import { useQuery } from "@tanstack/react-query"
 import {
   Column,
@@ -12,6 +13,11 @@ import {
   useReactTable,
 } from "@tanstack/react-table"
 
+import {
+  IamUser,
+  WalletConnectedEvent,
+  findIamByProject,
+} from "@/lib/api/events"
 import { Icons } from "@/components/icons"
 import { Button } from "@/components/ui/button/button"
 import {
@@ -21,11 +27,6 @@ import {
 } from "@/components/ui/collapsible"
 import Input from "@/components/ui/input"
 import Scrollbar from "@/components/ui/scrollbar"
-import { useAtom } from "jotai/esm/react"
-import { walletConnectedAtom } from "@/components/drawer-views/context"
-import { findIamByProject, IamUser, WalletConnectedEvent } from "@/lib/api/events"
-import Link from "next/link"
-import { useRouter } from "next/router"
 
 const columnHelper = createColumnHelper<IamUser>()
 
@@ -48,7 +49,9 @@ const columns = [
     ),
     cell: (info) => (
       <div className="flex items-center">
-        {info.getValue() && info.getValue().length > 0 && info.getValue()[0].toLowerCase() === "solana" ? (
+        {info.getValue() &&
+        info.getValue().length > 0 &&
+        info.getValue()[0].toLowerCase() === "solana" ? (
           <Icons.solana className="mr-2 inline h-6 w-6" />
         ) : (
           <Icons.ethereum className="mr-2 inline h-auto w-4" />
@@ -65,7 +68,11 @@ const columns = [
         <Icons.upDown className="text-dark-200 hover:text-dark-100 ml-2 inline h-auto w-4" />
       </CollapsibleTrigger>
     ),
-    cell: (info) => <Link href={`/dashboard?id=${info.getValue()?.name}`}>{info.getValue()?.name}</Link>,
+    cell: (info) => (
+      <Link href={`/dashboard?id=${info.getValue()?.name}`}>
+        {info.getValue()?.name}
+      </Link>
+    ),
   }),
   columnHelper.accessor("transactionVolume", {
     header: () => (
@@ -104,19 +111,23 @@ const columns = [
 
 const WalletAddressTable = () => {
   const { query } = useRouter()
-  
+
   const { data: tableData, isLoading } = useQuery({
     queryKey: ["tableData"],
     queryFn: async () => {
       console.log(query)
-      return findIamByProject(query.id as string).then(x => x.map(y => ({ ...y})))
+      return findIamByProject(query.id as string).then((x) =>
+        x.map((y) => ({ ...y }))
+      )
     },
     refetchOnWindowFocus: true,
   })
 
   useEffect(() => console.log(tableData, "789"), [tableData])
 
-  const table = useReactTable<IamUser & { transactionVolume: number, transactionExecuted: number }>({
+  const table = useReactTable<
+    IamUser & { transactionVolume: number; transactionExecuted: number }
+  >({
     data: tableData ?? [],
     columns,
     getCoreRowModel: getCoreRowModel(),

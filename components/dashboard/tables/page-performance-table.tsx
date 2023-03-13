@@ -30,13 +30,13 @@ const PagePerformanceTable = ({ pageViews }: { pageViews: any[] }) => {
 
   useEffect(() => {
     let mapping: any = {}
-    
-    pageViews.map(x => {
-      if(mapping[x.data.url]) mapping[x.data.url].views += 1
+
+    pageViews.map((x) => {
+      if (mapping[x.data.url]) mapping[x.data.url].views += 1
       else {
         mapping[x.data.url] = {
           ...x,
-          views: 1
+          views: 1,
         }
       }
     })
@@ -45,7 +45,7 @@ const PagePerformanceTable = ({ pageViews }: { pageViews: any[] }) => {
   }, [pageViews])
 
   useEffect(() => console.log(page, "page"), [page])
-  
+
   return (
     <ScrollArea className="h-[300px]">
       <table className="divide-dark-300 text-dark-100 min-w-full divide-y bg-transparent">

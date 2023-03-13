@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useRouter } from "next/router"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
@@ -8,7 +9,6 @@ import { Button } from "@/components/ui/button/button"
 import { useDrawer } from "../drawer-views/context"
 import { Icons } from "../icons"
 import Logo from "../site-logo"
-import { useRouter } from "next/router"
 
 const Sidebar = ({ className }: { className?: string }) => {
   const pathname = usePathname()
@@ -40,7 +40,7 @@ const Sidebar = ({ className }: { className?: string }) => {
         {siteConfig.dashboardSideNav.map((item, idx) => (
           <Link
             key={idx}
-            href={item.disabled ? "#" : (`${item.href as string}/${query.id}`)}
+            href={item.disabled ? "#" : `${item.href as string}/${query.id}`}
             className={cn(
               "text-dark-100 flex items-center rounded-md p-4 transition-all duration-300 hover:text-white",
               item.href === pathname
