@@ -2,11 +2,11 @@ import React from "react"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
+import WalletConnect from "@/components/wallet-connect"
 import { useDrawer } from "../drawer-views/context"
 import MainNav from "../main-nav"
 import Logo from "../site-logo"
 import Hamburger from "../ui/hamburger"
-import User from "../user"
 
 function HeaderRightArea() {
   return (
@@ -15,10 +15,7 @@ function HeaderRightArea() {
         mainNavItem={siteConfig.homeNav}
         mainNavClasses="space-x-4 xl:space-x-6 hidden md:flex"
       />
-      <User
-        userClasses="p-2 xl:p-1 bg-dark-700 rounded-full flex space-x-2"
-        navItems={siteConfig.homeNav}
-      />
+      <WalletConnect />
     </div>
   )
 }

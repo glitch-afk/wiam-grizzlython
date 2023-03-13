@@ -1,7 +1,6 @@
 import { type NextPage } from "next"
 import Head from "next/head"
 import Link from "next/link"
-import { useSession } from "next-auth/react"
 
 import { siteConfig, siteRoutes } from "@/config/site"
 import FeaturesSection from "@/components/landing/features"
@@ -13,7 +12,6 @@ import SiteHeader from "@/components/site-header"
 import { Button } from "@/components/ui/button/button"
 
 const Home: NextPage = () => {
-  const { data: session } = useSession()
   return (
     <>
       <Head>
@@ -30,14 +28,9 @@ const Home: NextPage = () => {
             />
           </div>
           <div className="hidden w-full items-center justify-end space-x-4 lg:flex">
-            <Link href={siteRoutes.login}>
-              <Button shape="pill" variant={"link"} className="text-semibold">
-                Log in
-              </Button>
-            </Link>
-            <Link href={siteRoutes.register}>
+            <Link href={siteRoutes.auth}>
               <Button shape="pill" className="text-semibold" variant={"subtle"}>
-                Sign Up
+                Connect Wallet
               </Button>
             </Link>
           </div>

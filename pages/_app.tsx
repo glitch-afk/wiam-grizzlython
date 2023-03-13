@@ -1,19 +1,21 @@
 import "@/styles/globals.css"
 import "@/styles/scrollbar.css"
+import "@/styles/wallet.css"
 import type { AppType } from "next/app"
-import { Inter as FontSans } from "@next/font/google"
-import { type Session } from "next-auth"
-import { SessionProvider } from "next-auth/react"
+import { Inter as FontSans } from "next/font/google"
 
 import "overlayscrollbars/overlayscrollbars.css"
+import { useMemo } from "react"
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base"
+import {
+  ConnectionProvider,
+  WalletProvider,
+} from "@solana/wallet-adapter-react"
+import { WalletModalProvider } from "@solana/wallet-adapter-react-ui"
+import { clusterApiUrl } from "@solana/web3.js"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 
 import DrawersContainer from "@/components/drawer-views/container"
-import "../lib/api/events"
-import { useEffect } from "react"
-
-import { findEventsByProject } from "../lib/api/events"
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -23,10 +25,18 @@ const fontSans = FontSans({
 
 const queryClient = new QueryClient()
 
-const App: AppType<{ session: Session | null }> = ({
-  Component,
-  pageProps: { session, ...pageProps },
-}) => {
+const App: AppType = ({ Component, pageProps: { ...pageProps } }) => {
+  // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
+  const network = WalletAdapterNetwork.Devnet
+
+  // You can also provide a custom RPC endpoint.
+  const endpoint = useMemo(() => clusterApiUrl(network), [network])
+  const wallets = useMemo(
+    () => [],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [network]
+  )
+
   return (
     <>
       <style jsx global>{`
@@ -34,13 +44,17 @@ const App: AppType<{ session: Session | null }> = ({
 					--font-sans: ${fontSans.style.fontFamily};
 				}
 			}`}</style>
-      <SessionProvider session={session}>
-        <QueryClientProvider client={queryClient}>
-          <Component {...pageProps} />
-          <DrawersContainer />
-          <ReactQueryDevtools initialIsOpen={false} />
-        </QueryClientProvider>
-      </SessionProvider>
+
+      <QueryClientProvider client={queryClient}>
+        <ConnectionProvider endpoint={endpoint}>
+          <WalletProvider wallets={wallets} autoConnect>
+            <WalletModalProvider>
+              <Component {...pageProps} />
+              <DrawersContainer />
+            </WalletModalProvider>
+          </WalletProvider>
+        </ConnectionProvider>
+      </QueryClientProvider>
     </>
   )
 }

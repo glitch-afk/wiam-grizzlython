@@ -25,17 +25,8 @@ import PagePerformanceTable from "@/components/dashboard/tables/page-performance
 import RecentActivityTable from "@/components/dashboard/tables/recent-activity"
 import {
   pageViewedAtom,
-  usePageViewedEvents,
-  useWalletConnectedEvents,
   walletConnectedAtom,
 } from "@/components/drawer-views/context"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 
 export const strokeColors = ["#9747FF", "#F92672", "#4DA765", "#FF8947"]
 

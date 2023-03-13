@@ -1,9 +1,8 @@
-import React, { useEffect } from "react"
+import React from "react"
 import Head from "next/head"
 import Image from "next/image"
 import Link from "next/link"
-import { projects } from "@/data"
-import { useQuery, useQueryClient } from "@tanstack/react-query"
+import { useQuery } from "@tanstack/react-query"
 
 import { siteConfig } from "@/config/site"
 import { findProjectByOwner } from "@/lib/api/projects"
@@ -12,7 +11,7 @@ import MainNav from "@/components/main-nav"
 import SiteHeader from "@/components/site-header"
 import StatusCard from "@/components/status-card"
 import { Button } from "@/components/ui/button/button"
-import User from "@/components/user"
+import WalletConnect from "@/components/wallet-connect"
 
 const ProjectsPage = () => {
   const {
@@ -38,7 +37,7 @@ const ProjectsPage = () => {
           />
 
           <Icons.bell className="h-auto w-5" />
-          <User userClasses="bg-dark-500 space-x-3 rounded-full cursor-pointer" />
+          <WalletConnect />
         </div>
       </SiteHeader>
       <main className="mx-auto w-full max-w-7xl px-6 md:mt-16 2xl:px-0">
