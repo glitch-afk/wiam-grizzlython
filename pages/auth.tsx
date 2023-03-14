@@ -61,10 +61,10 @@ const AuthPage = () => {
               </div>
             </div>
 
-            <div className="mt-8 flex w-full items-center justify-center">
+            <div className="mt-8 flex flex-col space-y-2 w-full items-center justify-center">
               <WalletConnect />
               {wallet && 
-                <div onClick={() => signIn()}>
+                <div onClick={() => signIn()} className="cursor-pointer px-3 font-bold rounded-md hover:bg-brand-pink/20 py-2 bg-brand-pink">
                   Sign Message
                 </div>
               }
