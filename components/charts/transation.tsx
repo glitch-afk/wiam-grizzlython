@@ -54,7 +54,7 @@ const TransactionChart = ({ chartData }: { chartData: any }) => {
         />
         <Area
           type="monotone"
-          dataKey="views"
+          dataKey="sessions"
           stroke="#9747FF"
           fill="url(#colorUv)"
         />
