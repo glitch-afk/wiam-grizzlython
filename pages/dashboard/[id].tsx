@@ -17,6 +17,7 @@ import {
   convertWalletConnectedGraph,
   findEventsByProject,
   generateRetentionTime,
+  findIamByProject,
 } from "@/lib/api/events"
 import OverviewChart from "@/components/charts/overview"
 import TransactionChart from "@/components/charts/transation"
@@ -73,6 +74,30 @@ const Dashboard = () => {
     refetchOnWindowFocus: true,
   })
 
+  const { data: iamData, isLoading: isLoadingIam } = useQuery({
+    queryKey: ["tableData"],
+    queryFn: async () => {
+      const id = window.location.pathname.split("/")[2]
+      return findIamByProject(id ?? query.id as string).then((x) =>
+        x.map((y) => ({ ...y }))
+      )
+    },
+    refetchOnWindowFocus: true,
+  })
+
+  useEffect(() => {
+    if(iamData) {
+      setOverviewData((x) => {
+        let shallowCopy = [...x]
+
+        shallowCopy[1].dataDisplay = `${iamData.length} Users`
+        shallowCopy[1].percentChange = 0
+
+        return x
+      })
+    }
+  }, [iamData])
+
   useEffect(() => {
     if (!isLoading && !error && walletConnectedEvents.length > 0) {
       const answer = convertWalletConnectedGraph(
@@ -91,7 +116,7 @@ const Dashboard = () => {
           .reverse()
           .map((x) => ({
             date: new Date(x.startDate).getTime(),
-            views: x.number,
+            sessions: x.number,
             btc: 0,
             diff: 0,
             name: new Date(x.startDate).toDateString(),
@@ -110,13 +135,13 @@ const Dashboard = () => {
         today.setDate(today.getDate() - 7)
         const previousRetentionTime = answer[today.toDateString()].number
 
-        shallowCopy[1].dataDisplay = `${currentRetentionTime.toFixed(2)} Users`
-        if (currentRetentionTime <= 0) shallowCopy[1].percentChange = -100
-        else if (previousRetentionTime <= 0) shallowCopy[1].percentChange = 100
-        else
-          shallowCopy[1].percentChange = Number(
-            ((currentRetentionTime / previousRetentionTime) * 100).toFixed(2)
-          )
+        // shallowCopy[1].dataDisplay = `${currentRetentionTime.toFixed(2)} Users`
+        // if (currentRetentionTime <= 0) shallowCopy[1].percentChange = -100
+        // else if (previousRetentionTime <= 0) shallowCopy[1].percentChange = 100
+        // else
+        //   shallowCopy[1].percentChange = Number(
+        //     ((currentRetentionTime / previousRetentionTime) * 100).toFixed(2)
+        //   )
 
         shallowCopy[0].dataDisplay = `${pageViewedEvents.length} Views`
 
