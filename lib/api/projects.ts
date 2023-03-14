@@ -3,21 +3,17 @@ import { request } from "./utils"
 export interface Project {
   id?: string
   name: string
-  key: string
-  userId: string
+  key?: string
+  userId?: string
   user?: any
 }
 
-export const findProjectByOwner = async (
-  userId: string
-): Promise<Project[]> => {
+export const findProjectByOwner = async (): Promise<Project[]> => {
   try {
     const data = await request({
       url: "/project",
       method: "GET",
-      data: {
-        owner: userId,
-      },
+      data: {},
     })
 
     return data.data
@@ -38,7 +34,6 @@ export const findProjectById = async (id: string): Promise<Project[]> => {
         id: id,
       },
     })
-    console.log(data, "12345")
 
     return [data.data]
   } catch (e: any) {

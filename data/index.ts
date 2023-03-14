@@ -39,23 +39,23 @@ export const projects = [
 export const OverViewCardsData = [
   {
     title: "Page Views",
-    dataDisplay: "2.7k",
-    percentChange: 4,
+    dataDisplay: "0 Views",
+    percentChange: 0,
   },
   {
     title: "Total Unique Users",
-    dataDisplay: "98",
-    percentChange: 12,
+    dataDisplay: "0 Users",
+    percentChange: 0,
   },
   {
     title: "Average Retention Time",
-    dataDisplay: "17 Sec",
-    percentChange: 2,
+    dataDisplay: "0 Sec",
+    percentChange: 0,
   },
   {
     title: "Bounce Rate",
-    dataDisplay: "35%",
-    percentChange: -3,
+    dataDisplay: "0%",
+    percentChange: 0,
   },
 ]
 

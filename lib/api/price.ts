@@ -21,7 +21,7 @@ export const getTransactionDetails = async (hash: string) => {
 
   const data = await res.data
 
-  if (!data)
+  if (!data || data.length <= 0)
     return {
       type: "",
       description: "",

@@ -7,6 +7,7 @@ import AddProjectForm from "@/components/add-project-form"
 import { Icons } from "@/components/icons"
 import SiteHeader from "@/components/site-header"
 import { Button } from "@/components/ui/button/button"
+import { createProject } from "@/lib/api/projects"
 
 const AddProject = () => {
   return (

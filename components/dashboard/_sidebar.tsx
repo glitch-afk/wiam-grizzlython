@@ -52,7 +52,7 @@ const Sidebar = ({ className }: { className?: string }) => {
             <item.icon className="mr-3 h-6 w-6" />
             <span className="text-lg">{item.title}</span>
             {item.disabled ? (
-              <span className="bg-dark-400 ml-2 rounded-full px-2 py-1 text-xs text-green-400">
+              <span className="bg-dark-400 ml-2 whitespace-nowrap rounded-full px-2 py-1 text-xs text-green-400">
                 Coming Soon
               </span>
             ) : null}

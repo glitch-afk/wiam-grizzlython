@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 
 import { cn } from "@/lib/utils"
 import Input from "@/components/ui/input"
 import { Button } from "./ui/button/button"
+import { createProject } from "@/lib/api/projects"
+import { useRouter } from "next/router"
 
 interface AddProjectFormProps extends React.HTMLAttributes<HTMLDivElement> {
   cardTitle?: string
@@ -15,6 +17,18 @@ const AddProjectForm = ({
   className,
   ...props
 }: AddProjectFormProps) => {
+  const [name, setName] = useState("")
+
+  const router = useRouter()
+
+  const newProject = async () => {
+    const project = await createProject({
+      name
+    })
+
+    router.push(`/dashboard/${project.id}`)
+  }
+
   return (
     <div
       className={cn(
@@ -40,6 +54,8 @@ const AddProjectForm = ({
           autoCapitalize="none"
           autoComplete="off"
           autoCorrect="off"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
 
         <Input
@@ -52,7 +68,7 @@ const AddProjectForm = ({
           autoCorrect="off"
         />
 
-        <Button fullWidth color="white" shape="rounded">
+        <Button onClick={(e) => { e.preventDefault(); newProject() }} fullWidth color="white" shape="rounded">
           Next
         </Button>
       </form>

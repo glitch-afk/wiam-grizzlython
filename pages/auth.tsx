@@ -1,13 +1,49 @@
 import React from "react"
 import Head from "next/head"
-import Link from "next/link"
+import base58 from "bs58"
 
 import { Icons } from "@/components/icons"
 import SiteHeader from "@/components/site-header"
 import { Button } from "@/components/ui/button/button"
 import WalletConnect from "@/components/wallet-connect"
+import { useWallet } from "@solana/wallet-adapter-react"
+import { useWalletModal } from "@solana/wallet-adapter-react-ui"
+import axios from "axios"
+import { authenticate } from "@/lib/api/auth"
+import { useRouter } from "next/router"
 
 const AuthPage = () => {
+  const wallet = useWallet()
+  const walletModal = useWalletModal()
+  const router = useRouter()
+
+  const signMessage = async () => {
+    if (!wallet.connected) {
+      walletModal.setVisible(true);
+    }
+
+    const message = "wiam did this"
+
+    // @ts-ignore
+    const signature = await wallet.signMessage(Buffer.from(message))
+
+    const serializedSignature = base58.encode(signature)
+
+    return serializedSignature
+  }
+
+  const signIn = async () => {
+    const signature = await signMessage()
+    const address = wallet.publicKey?.toString()
+
+    const data = await authenticate("", signature, address?.toString() as string)
+
+    window.localStorage.setItem("accessToken", data.accessToken)
+    window.localStorage.setItem("refreshToken", data.refreshToken)
+
+    router.push("/projects")
+  }
+  
   return (
     <>
       <Head>
@@ -27,6 +63,11 @@ const AuthPage = () => {
 
             <div className="mt-8 flex w-full items-center justify-center">
               <WalletConnect />
+              {wallet && 
+                <div onClick={() => signIn()}>
+                  Sign Message
+                </div>
+              }
             </div>
           </div>
         </div>

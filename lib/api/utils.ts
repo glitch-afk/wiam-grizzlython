@@ -6,12 +6,11 @@ export const request = async (config: {
   data: any
   method: string
 }) => {
-  console.log(config.method == "GET" ? config.data : {}, "!23")
   const res = await axios({
-    url: `http://localhost:5000/v1${config.url}`,
+    url: `https://web3-iam-production.up.railway.app/v1${config.url}`,
     headers: {
       ...config.headers,
-      Authorization: `Bearer token`,
+      Authorization: `Bearer ${window.localStorage.getItem("accessToken")}`,
     },
     data: config.data,
     params: config.method == "GET" ? config.data : {},
