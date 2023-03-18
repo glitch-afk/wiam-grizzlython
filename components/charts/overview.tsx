@@ -1,5 +1,5 @@
 import React from "react"
-import { Line, LineChart, ResponsiveContainer, YAxis } from "recharts"
+import { Line, LineChart, ResponsiveContainer } from "recharts"
 
 import { cn } from "@/lib/utils"
 
@@ -79,7 +79,7 @@ const OverviewChart = ({
               strokeWidth={2}
               dot={false}
             />
-            <YAxis
+            {/* <YAxis
               orientation="right"
               tickLine={false}
               axisLine={false}
@@ -88,7 +88,7 @@ const OverviewChart = ({
               minTickGap={10}
               tick={{ stroke: "#464C57" }}
               width={40}
-            />
+            /> */}
           </LineChart>
         </ResponsiveContainer>
       </div>
