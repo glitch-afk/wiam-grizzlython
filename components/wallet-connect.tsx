@@ -8,7 +8,7 @@ const WalletConnect = () => {
   if (!isMounted) return null
   return (
     <>
-      <WalletMultiButton className="whitespace-nowrap" />
+      <WalletMultiButton />
     </>
   )
 }
