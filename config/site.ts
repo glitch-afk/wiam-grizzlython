@@ -47,9 +47,9 @@ export const siteConfig: SiteConfig = {
     },
     {
       title: "Docs",
-      href: "/docs",
-      disabled: true,
-      external: false,
+      href: "https://github.com/sk1122/wiam-sdk",
+      disabled: false,
+      external: true,
     },
   ],
   dashboardSideNav: [
@@ -111,14 +111,14 @@ export const siteConfig: SiteConfig = {
     },
     {
       title: "Docs",
-      href: "/docs",
-      disabled: true,
-      external: false,
+      href: 'https://github.com/sk1122/wiam-sdk',
+      disabled: false,
+      external: true,
     },
   ],
   links: {
-    twitter: "https://twitter.com/0xv3n0m_",
+    twitter: "https://twitter.com/wiamanalytics",
     github: "https://github.com/glitch-afk",
-    docs: "/",
+    docs: "https://github.com/sk1122/wiam-sdk",
   },
 }

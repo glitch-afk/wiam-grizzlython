@@ -2,6 +2,7 @@ import React from "react"
 
 import { Icons } from "@/components/icons"
 import Logo from "@/components/site-logo"
+import {siteConfig} from "@/config/site"
 
 const SiteFooter = () => {
   return (
@@ -28,11 +29,11 @@ const SiteFooter = () => {
       <div className="mt-8 border-t border-white/10 pt-8 md:flex md:items-center md:justify-between">
         <div className="flex space-x-6 md:order-2">
           <div className="flex justify-center space-x-6 md:order-2">
-            <a href="#" className="text-gray-400 hover:text-gray-500">
+            {/* <a href="#" className="text-gray-400 hover:text-gray-500">
               <span className="sr-only">LinkedIn</span>
               <Icons.linkedin className="hover:stroke-sky-700" />
-            </a>
-            <a href="#" className="text-gray-400 hover:text-gray-500">
+            </a> */}
+            <a href={siteConfig.links.twitter} className="text-gray-400 hover:text-gray-500">
               <span className="sr-only">Twitter</span>
               <Icons.twitter
                 className="h-6 w-6 fill-[#888888] stroke-[#888888] hover:fill-[#2AABEE] hover:stroke-[#2AABEE]"
@@ -40,15 +41,15 @@ const SiteFooter = () => {
               />
             </a>
 
-            <a href="#" className="text-gray-400 hover:text-gray-500">
+            <a href={siteConfig.links.github} className="text-gray-400 hover:text-gray-500">
               <span className="sr-only">GitHub</span>
               <Icons.gitHub />
             </a>
 
-            <a href="#" className="text-gray-400 hover:text-gray-500">
+            {/* <a href="#" className="text-gray-400 hover:text-gray-500">
               <span className="sr-only">Discord</span>
               <Icons.discord />
-            </a>
+            </a> */}
           </div>
         </div>
         <p className="mt-8 text-xs leading-5 text-gray-400 md:order-1 md:mt-0">
