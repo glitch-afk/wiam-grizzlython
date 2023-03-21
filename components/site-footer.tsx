@@ -21,9 +21,11 @@ const SiteFooter = () => {
           <li className="text-dark-100 cursor-pointer hover:text-white">
             Blog
           </li>
+          <a href={siteConfig.links.docs} target="_blank">
           <li className="text-dark-100 cursor-pointer hover:text-white">
             Docs
           </li>
+          </a>
         </ul>
       </div>
       <div className="mt-8 border-t border-white/10 pt-8 md:flex md:items-center md:justify-between">

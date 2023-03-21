@@ -16,6 +16,7 @@ const MainNav = ({ mainNavClasses, mainNavItem }: MainNavProps) => {
         <Link
           href={item.disabled ? "#" : (item.href as string)}
           key={idx}
+          target="_blank"
           className="text-dark-50 text-sm font-semibold transition-colors duration-300 hover:text-white"
         >
           {item.title}
