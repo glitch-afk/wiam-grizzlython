@@ -9,7 +9,7 @@ const resources = [
   {
     name: "Indepth wallet & transaction tracking",
     description:
-      "Get a deep insights into user behavior by tracking wallets, transactions, and customizing event tracking. With an intuitive dashboard, businesses can make informed decisions to scale their Web3 operations, optimize user acquisition and retention, and drive revenue growth.",
+      "Our analytics tool tracks wallets and transactions for web3 products, providing insights into user behavior, trends, and opportunities for growth. Gain a comprehensive view of your users and make data-driven decisions to drive success.",
     classes: "md:col-span-6 xl:col-span-7",
     bgImage: "/assets/tracking.png",
     comingSoon: false,
@@ -17,7 +17,7 @@ const resources = [
   {
     name: "Reward active users",
     description:
-      "Get a deep insights into user behavior by tracking wallets, transactions, and customizing event tracking. With an intuitive dashboard, businesses can make informed decisions to scale.",
+      "Incentivize active users and drive engagement with our customizable reward system. Build a loyal user base and achieve long-term success for your product.",
     classes: "md:col-span-6 xl:col-span-5",
     bgImage: "/assets/Airdrop.png",
     comingSoon: false,
@@ -25,7 +25,7 @@ const resources = [
   {
     name: "Customizable event tracking",
     description:
-      "Get a deep insights into user behavior by tracking wallets, transactions, and customizing event tracking. With an intuitive dashboard",
+      "Track user behavior and gain valuable insights with our customizable event tracking. Optimize your product's design and user experience to drive engagement and increase conversions.",
     classes: "md:col-span-6 xl:col-span-5",
     bgImage: "/assets/Customizable.png",
     comingSoon: true,
@@ -33,7 +33,7 @@ const resources = [
   {
     name: "Accurate Heatmaps",
     description:
-      "Get a deep insights into user behavior by tracking wallets, transactions, and customizing event tracking. With an intuitive dashboard, businesses can make informed decisions to scale.",
+      "Our platform provides accurate heatmaps to help you visualize user behavior and identify areas of high engagement. With our advanced tracking technology, you can gain a deeper understanding of user behavior and optimize your product for maximum impact.",
     classes: "md:col-span-6 xl:col-span-7",
     bgImage: "/assets/Heatmaps.png",
     comingSoon: true,

@@ -33,11 +33,7 @@ const IntegrationSection = () => {
                 Seamless integration <br /> with your dapps
               </p>
               <p className="mt-6 text-lg leading-8">
-                Get a deep insights into user behavior by tracking wallets,
-                transactions, and customizing event tracking. With an intuitive
-                dashboard, businesses can make informed decisions to scale their
-                Web3 operations, optimize user acquisition and retention, and
-                drive revenue growth.
+              Our platform seamlessly integrates with your dapps, providing advanced analytics and insights into user behavior. With our easy integration, you can gain a deeper understanding of your users and optimize your product for success.
               </p>
               <dl className="mt-10 mb-8 max-w-xl space-y-8 text-base leading-7 lg:max-w-none">
                 {features.map((feature) => (
