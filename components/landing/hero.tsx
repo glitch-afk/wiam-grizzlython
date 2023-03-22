@@ -1,6 +1,7 @@
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
+import {siteConfig} from "@/config/site"
 
 import { Icons } from "@/components/icons"
 
@@ -28,7 +29,7 @@ const Hero = () => {
             you need to make informed decisions and drive business growth.
           </p>
           <div className="mt-10 flex items-center justify-center gap-x-6">
-            <Link href="#" className="customBtn relative">
+            <Link href={siteConfig.links.docs} className="customBtn relative">
               Get Started
             </Link>
           </div>

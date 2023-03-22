@@ -54,7 +54,7 @@ const Home: NextPage = () => {
               outpace the competition.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <Link href="#" className="customBtn relative">
+              <Link href={siteConfig.links.docs} className="customBtn relative">
                 Get Started
               </Link>
             </div>
