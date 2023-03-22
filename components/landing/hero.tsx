@@ -40,7 +40,6 @@ const Hero = () => {
           src="/assets/hero.png"
           width={1414}
           height={1414}
-          prefetch={true}
           className="bg-dark-700 origin-top transform-gpu rounded-xl"
           alt="App Screenshot"
         />

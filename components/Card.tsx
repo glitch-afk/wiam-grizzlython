@@ -77,6 +77,7 @@ export default function Resource({ resource, classes, bgImage }) {
       <img
         src={bgImage}
         alt="feature_img"
+        loading="lazy"
         className={cn(
           "absolute inset--0 mx-auto h-3/4 w-full min-w-max",
           bgImage === "/assets/Customizable.png" && "md:-left-24 lg:-left-44"
