@@ -7,7 +7,7 @@ export const request = async (config: {
   method: string
 }) => {
   const res = await axios({
-    url: `https://web3-iam-production.up.railway.app/v1${config.url}`,
+    url: `https://web3-iam-production-0d26.up.railway.app/v1${config.url}`,
     headers: {
       ...config.headers,
       Authorization: `Bearer ${window.localStorage.getItem("accessToken")}`,
