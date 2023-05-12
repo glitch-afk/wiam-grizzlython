@@ -8,6 +8,7 @@
 - [Tailwind](https://tailwindcss.com) for styling.
 - [Recharts](https://recharts.org) for building charts.
 - Solana Wallet Adapter - to help connect with solana based wallets
+- [wiam-sdk](https://github.com/sk1122/wiam-sdk)
 
 # Features
 ---
